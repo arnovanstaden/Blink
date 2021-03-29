@@ -1,0 +1,73 @@
+@import "./variables.scss";
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: $main-font;
+    color: $grey;
+    background: $light-grey;
+}
+
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//     font-family: $heading-font;
+// }
+
+// Buttons
+
+.button {
+    padding: 0.5rem 2rem;
+    background: $blue;
+    border: none;
+    color: $white;
+    border-radius: 0.25rem;
+    -webkit-border-radius: 0.25rem;
+    -moz-border-radius: 0.25rem;
+    -ms-border-radius: 0.25rem;
+    -o-border-radius: 0.25rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: $blue 2px solid;
+    transition: 0.2s ease-in-out;
+    -webkit-transition: 0.2s ease-in-out;
+    -moz-transition: 0.2s ease-in-out;
+    -ms-transition: 0.2s ease-in-out;
+    -o-transition: 0.2s ease-in-out;
+
+    &:hover {
+        background: transparent;
+        color: $grey;
+    }
+
+    &-alt {
+        background: transparent;
+        border: $blue 2px solid;
+        color: $grey;
+
+        &:hover {
+            background-color: $blue;
+            color: $white;
+        }
+    }
+}
+
+
+// Divider
+
+.divider {
+    height: 0.5px;
+    width: 100%;
+    background-color: $medium-grey;
+    margin: 1rem auto;
+}
