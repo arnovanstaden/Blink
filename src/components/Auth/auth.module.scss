@@ -1,6 +1,6 @@
-@import "../../../styles/variables.scss";
+@import "../../styles/variables.scss";
 
-.signin {
+.auth {
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -19,4 +19,12 @@
         font-weight: 600;
     }
 
+    .options {
+        display: flex;
+        justify-content: space-between;
+
+        a {
+            font-size: 0.8rem;
+        }
+    }
 }

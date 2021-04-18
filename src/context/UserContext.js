@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 import { auth } from "../config/firebase";
-import { createDbUser } from "../utils/user";
 
 export const UserContext = createContext(null);
 
@@ -17,6 +16,7 @@ export const UserProvider = ({ children }) => {
                 const user = {
                     uid: result.user.uid,
                     email: result.user.email,
+                    displayName: authData.displayName
                 }
                 auth.currentUser.updateProfile({
                     displayName: user.displayName
@@ -26,11 +26,8 @@ export const UserProvider = ({ children }) => {
             .catch((error) => {
                 throw error
             });
-        await createDbUser(newUser);
         return newUser
     }
-
-
 
     const signIn = async (authData) => {
         const authResult = await auth.signInWithEmailAndPassword(authData.email, authData.password)
@@ -75,8 +72,6 @@ export const UserProvider = ({ children }) => {
             }
         });
     }, []);
-
-
 
 
     // Context Value

@@ -1,10 +1,10 @@
 import React from 'react'
-
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // Components
-import SignIn from "../Auth/SignIn/SignIn"
-import Dashboard from "../Dashboard/Dashboard"
+import SignIn from "../Auth/SignIn";
+import SignUp from "../Auth/SignUp";
+import Dashboard from "../Dashboard/Dashboard";
 
 
 const Router = () => {
@@ -16,6 +16,9 @@ const Router = () => {
                 </Route>
                 <Route path="/signin">
                     <SignIn />
+                </Route>
+                <Route path="/signup">
+                    <SignUp />
                 </Route>
             </Switch>
         </BrowserRouter>

@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
-
-
+import Loader from "../components/UI/Loader/Loader";
 
 export const LoaderContext = createContext(null);
 
@@ -21,7 +20,7 @@ export const LoaderProvider = ({ children }) => {
         <LoaderContext.Provider
             value={{ showLoader, hideLoader }
             }>
-            {show ? <h1>Loader</h1> : null}
+            {show ? <Loader /> : null}
             { children}
         </LoaderContext.Provider>
     );

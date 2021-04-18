@@ -1,7 +1,7 @@
-import React from 'react';
 import { UserProvider } from "../../context/UserContext";
 import { LoaderProvider } from "../../context/LoaderContext";
-import NotificationsProvider from "../../components/UI/Library/Notifications/Notifications";
+import NotificationsProvider from "../../components/UI/Notifications/Notifications";
+import Nav from "../../components/UI/Nav/Nav";
 
 
 const AppWrap = ({ children }) => {
@@ -9,6 +9,7 @@ const AppWrap = ({ children }) => {
         <UserProvider>
             <LoaderProvider>
                 <NotificationsProvider>
+                    <Nav />
                     {children}
                 </NotificationsProvider>
             </LoaderProvider>

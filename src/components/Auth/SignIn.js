@@ -1,19 +1,19 @@
 import React, { useContext, useRef, useEffect } from 'react';
 import { useSnackbar } from 'notistack';
-import { Redirect } from "react-router";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 // Context
-import { UserContext } from "../../../context/UserContext"
-import { LoaderContext } from "../../../context/LoaderContext";
+import { UserContext } from "../../context/UserContext"
+import { LoaderContext } from "../../context/LoaderContext";
 
 // Components
-import Input from "../../UI/Library/Input/Input";
-import Button from "../../UI/Library/Button/Button";
+import Page from "../Page/Page"
+import Input from "../UI/Library/Input/Input";
+import Button from "../UI/Library/Button/Button";
 
 // Styles, Media
-import styles from "./signin.module.scss";
-import Logo from "../../../assets/images/logos/logo-light.svg";
+import styles from "./auth.module.scss";
+import Logo from "../../assets/images/logos/logo-light.svg";
 
 export default function SignIn() {
 
@@ -55,9 +55,9 @@ export default function SignIn() {
         }
 
         signIn(authData)
-            .then(data => {
+            .then(result => {
                 hideLoader();
-                enqueueSnackbar(`Welcome back!`, {
+                enqueueSnackbar(`Welcome back ${result.displayName}!`, {
                     variant: 'success',
                 });
                 return history.push('/')
@@ -72,7 +72,10 @@ export default function SignIn() {
 
 
     return (
-        <main className={styles.signin}>
+        <Page
+            title="Sign In"
+            className={styles.auth}
+        >
             <img src={Logo} alt="" />
             <h1>Sign In</h1>
             <form name="signin-form" id="signin-form">
@@ -80,6 +83,10 @@ export default function SignIn() {
                 <Input type="password" label="Password" inputRef={passwordRef} center />
                 <Button fullWidth onClick={handleAuth}>Sign In</Button>
             </form>
-        </main>
+            <div className={styles.options}>
+                <Link to="/resetpassword">Reset Password</Link>
+                <Link to="/signup">Sign Up</Link>
+            </div>
+        </Page>
     )
 }
