@@ -5,7 +5,7 @@ import App from './components/App/App';
 // Styles, Fonts, Icons
 import "./styles/global.scss";
 import "typeface-comfortaa";
-import "typeface-open-sans"
+import "typeface-poppins"
 import "./assets/icons/style.css"
 
 ReactDOM.render(

@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 
-// Hooks
-
-
 // Components
-import Login from "../Login/Login";
-import Dashboard from "../Dashboard/Dashboard";
+import AppWrap from "./AppWrap";
+import Router from "./Router";
 
 function App() {
 
   return (
-    <div className="App">
-      <Dashboard />
-      <Login />
-    </div>
+    <AppWrap>
+      <div className="App">
+        <Router />
+      </div>
+    </AppWrap>
   );
 }
 
