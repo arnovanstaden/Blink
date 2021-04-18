@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 // Components
 import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
+import ResetPassword from "../Auth/ResetPassword";
 import Dashboard from "../Dashboard/Dashboard";
 
 
@@ -19,6 +20,9 @@ const Router = () => {
                 </Route>
                 <Route path="/signup">
                     <SignUp />
+                </Route>
+                <Route path="/resetpassword">
+                    <ResetPassword />
                 </Route>
             </Switch>
         </BrowserRouter>

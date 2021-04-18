@@ -87,7 +87,7 @@ export default function SignUp() {
             className={styles.auth}
         >
             <img src={Logo} alt="" />
-            <h1>Sign In</h1>
+            <h1>Sign Up</h1>
             <form name="signup-form" id="signup-form">
                 <Input type="text" label="Username" inputRef={displayNameRef} autoFocus center />
                 <Input type="email" label="Email" inputRef={emailRef} center />
