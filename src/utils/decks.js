@@ -17,3 +17,15 @@ export const createDeck = async (data) => {
         })
     return saveResult
 }
+
+export const getUserDecks = async (uid) => {
+    const userBooks = decksRef.where("user", "==", uid).get()
+        .then((snapshot) => {
+            const data = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            return data
+        })
+    return userBooks
+}

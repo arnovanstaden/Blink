@@ -41,7 +41,7 @@ export default function SignUp() {
 
     // Handlers
     const handleAuth = async (e) => {
-        showLoader()
+        showLoader("Creating Your Profile")
 
         if (!validateForm(e)) {
             hideLoader()

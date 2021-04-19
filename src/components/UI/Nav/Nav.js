@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useSnackbar } from 'notistack';
+import { Link } from "react-router-dom"
 
 // Context
 import { UserContext } from "../../../context/UserContext";
@@ -34,9 +35,11 @@ const Nav = () => {
 
     return (
         <nav className={styles.nav}>
-            <div className={styles.logo}>
-                <img src={logo} alt="" />
-            </div>
+            <Link to="/">
+                <div className={styles.logo}>
+                    <img src={logo} alt="" />
+                </div>
+            </Link>
             <button onClick={handleLogout}>Logout</button>
         </nav>
     )

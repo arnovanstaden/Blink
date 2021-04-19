@@ -1,6 +1,7 @@
 // Components
 import Page from "../UI/Library/Page/Page";
 import FAB from "../UI/Library/FAB/FAB"
+import DecksView from "../Decks/View/View"
 
 // Styles
 import styles from "./dashboard.module.scss";
@@ -15,7 +16,10 @@ const Dashboard = () => {
             className={styles.dashboard}
         >
             <main className={styles.dashboard}>
-                Dashboard
+                <div className="heading">
+                    <h1>Dashboard</h1>
+                </div>
+                <DecksView />
                 <FAB
                     link="/decks/create"
                     tooltip="Create New Deck"
@@ -26,6 +30,5 @@ const Dashboard = () => {
         </Page>
     )
 }
-
 
 export default Dashboard

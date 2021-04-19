@@ -5,6 +5,7 @@ import { LoaderProvider } from "../../context/LoaderContext";
 // Components
 import NotificationsProvider from "../../components/UI/Notifications/Notifications";
 import Nav from "../../components/UI/Nav/Nav";
+import Router from "./Router";
 
 // MUI
 import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
@@ -21,9 +22,10 @@ const AppWrap = ({ children }) => {
                 <NotificationsProvider>
                     <StylesProvider injectFirst>
                         <ThemeProvider theme={theme} >
-                            <CssBaseline />
-                            <Nav />
-                            {children}
+                            <Router>
+                                <CssBaseline />
+                                {children}
+                            </Router>
                         </ThemeProvider>
                     </StylesProvider>
                 </NotificationsProvider>

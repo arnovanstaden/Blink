@@ -1,13 +1,51 @@
+import { useContext, useState, useEffect } from "react";
+import { getUserDecks } from "../../../utils/decks";
+import { v4 as uuid } from "uuid";
+
+// Context
+import { UserContext } from "../../../context/UserContext"
+import { LoaderContext } from "../../../context/LoaderContext";
+
 // Components
-import Page from "../../UI/Library/Page/Page"
+import DeckCard from "../Display/Card";
+
+// MUI
+import Grid from "@material-ui/core/Grid";
+
+import styles from "./view.module.scss";
 
 const View = () => {
+    // Config
+    const { currentUser } = useContext(UserContext);
+    const { showLoader, hideLoader } = useContext(LoaderContext);
+
+    // State
+    const [decks, setDecks] = useState(null);
+
+    // Data
+    useEffect(() => {
+        if (!decks) {
+            showLoader("Preparing Your Dashboard");
+            getUserDecks(currentUser.uid)
+                .then(result => {
+                    setDecks(result)
+                })
+        } else {
+            hideLoader()
+        }
+    }, [decks])
+
     return (
-        <Page
-            title="Create Deck"
-        >
-            View Deck
-        </Page>
+        <div className="view">
+            <div className="heading">
+                <h2>Your Decks</h2>
+            </div>
+            <Grid container spacing={3} className={styles.grid}>
+                {decks && decks.map(deck => (
+                    <DeckCard deck={deck} key={uuid()} />
+                ))}
+            </Grid>
+        </div>
     )
 }
 

@@ -41,7 +41,7 @@ export default function SignIn() {
 
     // Handlers
     const handleAuth = (e) => {
-        showLoader()
+        showLoader("Signing You In")
 
         if (!validateForm(e)) {
             hideLoader()

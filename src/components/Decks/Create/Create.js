@@ -1,4 +1,4 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useState } from "react";
 import { useSnackbar } from 'notistack';
 import { validateForm } from "../../../utils/general"
 import { createDeck } from "../../../utils/decks";
@@ -17,6 +17,7 @@ import Button from "../../UI/Library/Button/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 // Styles
 import styles from "./create.module.scss"
@@ -30,10 +31,19 @@ const Create = () => {
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const nameRef = useRef();
     const descriptionRef = useRef();
+    const categoryRef = useRef();
+
+    // State
+    const [descLength, setDescLength] = useState(0);
 
     // Handlers
+    const handleDescChange = (event) => {
+        const length = event.target.value.length
+        setDescLength(length)
+    }
+
     const handleCreate = (e) => {
-        showLoader()
+        showLoader("Creating new Deck")
         if (!validateForm(e)) {
             hideLoader()
             return enqueueSnackbar("Please complete all the relevant fields", {
@@ -44,6 +54,7 @@ const Create = () => {
         const data = {
             user: currentUser.uid,
             name: nameRef.current.value,
+            category: categoryRef.current.value,
             description: descriptionRef.current.value
         }
 
@@ -90,12 +101,32 @@ const Create = () => {
                                 margin="normal"
                                 required
                                 type="text"
+                                label="Category"
+                                inputRef={categoryRef}
+                                autoFocus
+                                variant="outlined"
+                                fullWidth />
+                            <TextField
+                                margin="normal"
+                                required
+                                type="text"
                                 label="Description"
                                 inputRef={descriptionRef}
                                 variant="outlined"
                                 fullWidth
-                                multiple
+                                multiline
                                 rows={4}
+                                inputProps={{
+                                    maxLength: 99,
+                                }}
+                                onChange={handleDescChange}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            {99 - descLength}
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                             <Button fullWidth onClick={handleCreate}>Create Deck</Button>
                         </Grid>

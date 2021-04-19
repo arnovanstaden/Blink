@@ -30,14 +30,23 @@ a {
 }
 
 .heading {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
 
     &.center {
         text-align: center;
     }
 
     h1 {
-        font-size: 2rem;
+        font-size: 1.75rem;
         font-weight: 600;
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
     }
 }
 

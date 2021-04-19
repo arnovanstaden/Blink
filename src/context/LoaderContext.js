@@ -1,5 +1,7 @@
 import { createContext, useState } from "react";
 
+import Loader from "../components/UI/Loader/Loader"
+
 // MUI
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -22,8 +24,10 @@ export const LoaderProvider = ({ children }) => {
 
     // State
     const [show, setShow] = useState(false);
+    const [text, setText] = useState("")
 
-    const showLoader = () => {
+    const showLoader = (loaderText) => {
+        setText(loaderText)
         setShow(true)
     };
 
@@ -36,7 +40,7 @@ export const LoaderProvider = ({ children }) => {
             value={{ showLoader, hideLoader }
             }>
             <Backdrop className={classes.backdrop} open={show}>
-                <CircularProgress color="inherit" />
+                <Loader text={text} />
             </Backdrop>
             { children}
         </LoaderContext.Provider>

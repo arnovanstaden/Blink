@@ -1,18 +1,20 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // Components
+import Nav from "../UI/Nav/Nav"
 import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
 import ResetPassword from "../Auth/ResetPassword";
 import Dashboard from "../Dashboard/Dashboard";
 import DeckView from "../Decks/View/View";
+import DeckEdit from "../Decks/Edit/Edit";
 import DeckCreate from "../Decks/Create/Create";
-import DeckLearn from "../Decks/Learn/Learn";
 
 
 const Router = () => {
     return (
         <BrowserRouter>
+            <Nav />
             <Switch>
                 <Route exact path="/">
                     <Dashboard />
@@ -34,11 +36,11 @@ const Router = () => {
                     <DeckCreate />
                 </Route>
                 <Route path="/decks/:id">
-                    <DeckView />
+                    <DeckEdit />
                 </Route>
-                <Route path="/learn/:id">
+                {/* <Route path="/learn/:id">
                     <DeckLearn />
-                </Route>
+                </Route> */}
 
             </Switch>
         </BrowserRouter>

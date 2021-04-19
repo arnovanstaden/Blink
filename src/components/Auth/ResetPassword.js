@@ -32,7 +32,7 @@ export default function ResetPassword() {
 
     // Handlers
     const handlePasswordReset = (e) => {
-        showLoader()
+        showLoader("Sending Password Reset Email")
 
         if (!validateForm(e)) {
             hideLoader()
