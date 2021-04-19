@@ -30,13 +30,13 @@ const Router = () => {
                 </Route>
 
                 {/* Decks */}
-                <Route exact path="/decks">
-                    <DeckView />
-                </Route>
                 <Route exact path="/decks/create">
                     <DeckCreate />
                 </Route>
                 <Route path="/decks/:id">
+                    <DeckView />
+                </Route>
+                <Route path="/learn/:id">
                     <DeckLearn />
                 </Route>
 

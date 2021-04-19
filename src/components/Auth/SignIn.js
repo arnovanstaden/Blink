@@ -1,6 +1,8 @@
 import { useContext, useRef, useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { useHistory, Link } from "react-router-dom";
+import { validateForm } from "../../utils/general"
+
 
 // Context
 import { UserContext } from "../../context/UserContext"
@@ -8,7 +10,6 @@ import { LoaderContext } from "../../context/LoaderContext";
 
 // Components
 import Page from "../UI/Library/Page/Page"
-import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
 import Container from "@material-ui/core/Container";
 
@@ -41,12 +42,8 @@ export default function SignIn() {
     // Handlers
     const handleAuth = (e) => {
         showLoader()
-        e.preventDefault();
 
-        let form = document.getElementById("signin-form")
-
-        // Validate
-        if (form.checkValidity() === false) {
+        if (!validateForm(e)) {
             hideLoader()
             return enqueueSnackbar("Please complete all the relevant fields", {
                 variant: 'error',
@@ -84,7 +81,9 @@ export default function SignIn() {
             <Container maxWidth="xs">
                 <div className={styles.auth}>
                     <img src={Logo} alt="" />
-                    <h1>Sign In</h1>
+                    <div className="heading">
+                        <h1>Sign In</h1>
+                    </div>
                     <form name="signin-form" id="signin-form">
                         <Grid container spacing={2}>
                             <TextField

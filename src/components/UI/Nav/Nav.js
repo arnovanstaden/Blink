@@ -2,9 +2,11 @@ import { useContext } from 'react';
 import { useSnackbar } from 'notistack';
 
 // Context
-import { UserContext } from "../../../context/UserContext"
+import { UserContext } from "../../../context/UserContext";
 
-
+// Styles
+import styles from "./nav.module.scss"
+import logo from "../../../assets/images/logos/logo-light.svg";
 
 const Nav = () => {
 
@@ -31,7 +33,10 @@ const Nav = () => {
     }
 
     return (
-        <nav>
+        <nav className={styles.nav}>
+            <div className={styles.logo}>
+                <img src={logo} alt="" />
+            </div>
             <button onClick={handleLogout}>Logout</button>
         </nav>
     )

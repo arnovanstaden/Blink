@@ -1,6 +1,7 @@
 import { useContext, useRef } from 'react';
 import { useSnackbar } from 'notistack';
 import { useHistory, Link } from "react-router-dom";
+import { validateForm } from "../../utils/general"
 
 // Context
 import { UserContext } from "../../context/UserContext"
@@ -8,7 +9,6 @@ import { LoaderContext } from "../../context/LoaderContext";
 
 // Components
 import Page from "../UI/Library/Page/Page"
-import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
 import Container from "@material-ui/core/Container";
 
@@ -33,12 +33,8 @@ export default function ResetPassword() {
     // Handlers
     const handlePasswordReset = (e) => {
         showLoader()
-        e.preventDefault();
 
-        let form = document.getElementById("reset-password-form");
-
-        // Validate
-        if (form.checkValidity() === false) {
+        if (!validateForm(e)) {
             hideLoader()
             return enqueueSnackbar("Please complete all the relevant fields", {
                 variant: 'error',
@@ -74,7 +70,9 @@ export default function ResetPassword() {
             <Container maxWidth="xs">
                 <div className={styles.auth}>
                     <img src={Logo} alt="" />
-                    <h1>Reset Password</h1>
+                    <div className="heading">
+                        <h1>Reset Password</h1>
+                    </div>
                     <form name="reset-password-form" id="reset-password-form">
                         <Grid container spacing={2}>
                             <TextField

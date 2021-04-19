@@ -1,1 +1,14 @@
 @import "../../../styles/variables.scss";
+
+.nav {
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+
+    .logo {
+        img {
+            width: 5rem;
+        }
+    }
+}

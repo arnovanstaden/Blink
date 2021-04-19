@@ -29,6 +29,18 @@ a {
     text-decoration: none;
 }
 
+.heading {
+
+    &.center {
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 600;
+    }
+}
+
 // Buttons
 
 .button {

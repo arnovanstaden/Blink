@@ -1,8 +1,15 @@
 import { SnackbarProvider } from 'notistack';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 // Styles
+const styles = {
+    success: { backgroundColor: 'purple' },
+};
 
-export default function NotificationsProvider({ children }) {
+
+const NotificationsProvider = ({ children }) => {
+
+
     return (
         <SnackbarProvider
             maxSnack={3}
@@ -15,3 +22,5 @@ export default function NotificationsProvider({ children }) {
         </SnackbarProvider>
     )
 }
+
+export default NotificationsProvider
