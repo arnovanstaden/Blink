@@ -1,4 +1,3 @@
-import React from 'react';
 import ClassNames from "classnames"
 
 // styles
@@ -13,25 +12,42 @@ const Input = (
         inputRef,
         value,
         onChange,
-        center }
+        center,
+        fullWidth,
+        multiple
+    }
 ) => {
 
     const classes = ClassNames(
         styles.input,
-        center ? styles.center : null
+        center ? styles.center : null,
+        fullWidth ? styles.fullWidth : null
     )
 
     return (
         <div className={classes}>
             {type ? <label htmlFor="">{label}</label> : null}
-            <input
-                placeholder={placeholder}
-                type={type}
-                autoFocus={autoFocus}
-                ref={inputRef}
-                value={value}
-                onChange={onChange ? () => onChange() : null}
-            />
+            {!multiple ?
+                <input
+                    placeholder={placeholder}
+                    type={type}
+                    autoFocus={autoFocus}
+                    ref={inputRef}
+                    value={value}
+                    onChange={onChange ? () => onChange() : null}
+                />
+                :
+                <textarea
+                    placeholder={placeholder}
+                    type={type}
+                    autoFocus={autoFocus}
+                    ref={inputRef}
+                    value={value}
+                    onChange={onChange ? () => onChange() : null}
+                />
+            }
+
+
         </div>
     )
 }

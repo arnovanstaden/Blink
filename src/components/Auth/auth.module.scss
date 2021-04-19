@@ -1,12 +1,14 @@
 @import "../../styles/variables.scss";
 
 .auth {
-    width: 100vw;
-    height: 100vh;
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    form {
+        width: 100%;
+    }
 
     img {
         width: 10rem;
@@ -20,11 +22,10 @@
     }
 
     .options {
-        display: flex;
-        justify-content: space-between;
+        margin-top: 0.75rem;
 
         a {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
     }
 }

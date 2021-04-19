@@ -1,0 +1,15 @@
+@import "../../../../styles/variables.scss";
+
+.fab {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+
+    button {
+        padding: 1.5rem;
+        border-radius: 50%;
+        border: none;
+        background: $blue-gradient;
+        color: $light-grey;
+    }
+}

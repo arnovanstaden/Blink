@@ -66,7 +66,7 @@ export const UserProvider = ({ children }) => {
                 setCurrentUser(null);
                 // nookies.set(undefined, 'TBN-Token', '', { path: '/' });
             } else {
-                const token = await user.getIdToken();
+                // const token = await user.getIdToken();
                 setCurrentUser(user);
                 // nookies.set(undefined, 'TBN-Token', token, { path: '/' });
             }

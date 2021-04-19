@@ -1,11 +1,12 @@
-import React from 'react';
-import withAuth from "../HOC/withAuth"
-
 // Components
-import Page from "../Page/Page"
+import Page from "../UI/Library/Page/Page";
+import FAB from "../UI/Library/FAB/FAB"
 
 // Styles
 import styles from "./dashboard.module.scss";
+
+// Icons
+import AddIcon from "@material-ui/icons/Add"
 
 const Dashboard = () => {
     return (
@@ -15,10 +16,16 @@ const Dashboard = () => {
         >
             <main className={styles.dashboard}>
                 Dashboard
+                <FAB
+                    link="/decks/create"
+                    tooltip="Create New Deck"
+                >
+                    <AddIcon />
+                </FAB>
             </main>
         </Page>
     )
 }
 
 
-export default withAuth(Dashboard)
+export default Dashboard

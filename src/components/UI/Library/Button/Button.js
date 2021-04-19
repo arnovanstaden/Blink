@@ -1,4 +1,3 @@
-import React from 'react';
 import ClassNames from "classnames"
 
 import styles from "./button.module.scss";

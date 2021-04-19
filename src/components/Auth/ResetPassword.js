@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { useSnackbar } from 'notistack';
 import { useHistory, Link } from "react-router-dom";
 
@@ -7,13 +7,19 @@ import { UserContext } from "../../context/UserContext"
 import { LoaderContext } from "../../context/LoaderContext";
 
 // Components
-import Page from "../Page/Page"
+import Page from "../UI/Library/Page/Page"
 import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
+import Container from "@material-ui/core/Container";
+
+// MUI
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
 
 // Styles, Media
 import styles from "./auth.module.scss";
 import Logo from "../../assets/images/logos/logo-light.svg";
+
 
 export default function ResetPassword() {
 
@@ -63,16 +69,31 @@ export default function ResetPassword() {
         <Page
             title="Reset Password"
             className={styles.auth}
+            center
         >
-            <img src={Logo} alt="" />
-            <h1>Reset Password</h1>
-            <form name="reset-password-form" id="reset-password-form">
-                <Input type="email" label="Email" inputRef={emailRef} center autoFocus />
-                <Button fullWidth onClick={handlePasswordReset}>Reset Password</Button>
-            </form>
-            <div className={styles.options}>
-                <Link to="/signin">Sign In</Link>
-            </div>
+            <Container maxWidth="xs">
+                <div className={styles.auth}>
+                    <img src={Logo} alt="" />
+                    <h1>Reset Password</h1>
+                    <form name="reset-password-form" id="reset-password-form">
+                        <Grid container spacing={2}>
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                type="email"
+                                label="Email"
+                                inputRef={emailRef}
+                                center
+                                fullWidth />
+                            <Button fullWidth onClick={handlePasswordReset}>Reset Password</Button>
+                        </Grid>
+                    </form>
+                    <Grid container justify="center" className={styles.options}>
+                        <Link to="/signin">Sign In</Link>
+                    </Grid>
+                </div>
+            </Container>
         </Page>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 import { useSnackbar } from 'notistack';
 import { useHistory, Link } from "react-router-dom";
 
@@ -7,9 +7,14 @@ import { UserContext } from "../../context/UserContext"
 import { LoaderContext } from "../../context/LoaderContext";
 
 // Components
-import Page from "../Page/Page"
+import Page from "../UI/Library/Page/Page"
 import Input from "../UI/Library/Input/Input";
 import Button from "../UI/Library/Button/Button";
+import Container from "@material-ui/core/Container";
+
+// MUI
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
 
 // Styles, Media
 import styles from "./auth.module.scss";
@@ -74,19 +79,40 @@ export default function SignIn() {
     return (
         <Page
             title="Sign In"
-            className={styles.auth}
+            center
         >
-            <img src={Logo} alt="" />
-            <h1>Sign In</h1>
-            <form name="signin-form" id="signin-form">
-                <Input type="text" label="Email" inputRef={emailRef} autoFocus center />
-                <Input type="password" label="Password" inputRef={passwordRef} center />
-                <Button fullWidth onClick={handleAuth}>Sign In</Button>
-            </form>
-            <div className={styles.options}>
-                <Link to="/resetpassword">Reset Password</Link>
-                <Link to="/signup">Sign Up</Link>
-            </div>
+            <Container maxWidth="xs">
+                <div className={styles.auth}>
+                    <img src={Logo} alt="" />
+                    <h1>Sign In</h1>
+                    <form name="signin-form" id="signin-form">
+                        <Grid container spacing={2}>
+                            <TextField
+                                margin="normal"
+                                required
+                                type="text"
+                                label="Email"
+                                inputRef={emailRef}
+                                autoFocus
+                                variant="outlined"
+                                fullWidth />
+                            <TextField
+                                margin="normal"
+                                required
+                                type="password"
+                                label="Password"
+                                inputRef={passwordRef}
+                                variant="outlined"
+                                fullWidth />
+                            <Button fullWidth onClick={handleAuth}>Sign In</Button>
+                        </Grid>
+                    </form>
+                    <Grid container justify="space-between" className={styles.options}>
+                        <Link to="/resetpassword">Reset Password</Link>
+                        <Link to="/signup">Sign Up</Link>
+                    </Grid>
+                </div>
+            </Container>
         </Page>
     )
 }
