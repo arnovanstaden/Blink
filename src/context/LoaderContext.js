@@ -21,14 +21,13 @@ export const LoaderProvider = ({ children }) => {
 
     const classes = useStyles();
 
-
     // State
     const [show, setShow] = useState(false);
     const [text, setText] = useState("")
 
     const showLoader = (loaderText) => {
+        setShow(true);
         setText(loaderText)
-        setShow(true)
     };
 
     const hideLoader = () => {

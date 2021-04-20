@@ -1,7 +1,8 @@
 // Components
 import Page from "../UI/Library/Page/Page";
-import FAB from "../UI/Library/FAB/FAB"
-import DecksView from "../Decks/View/View"
+import FAB from "../UI/Library/FAB/FAB";
+import DecksView from "../Decks/View/View";
+import Nav from "../UI/Nav/Nav"
 
 // Styles
 import styles from "./dashboard.module.scss";
@@ -15,6 +16,7 @@ const Dashboard = () => {
             title="Dashboard"
             className={styles.dashboard}
         >
+            <Nav />
             <main className={styles.dashboard}>
                 <div className="heading">
                     <h1>Dashboard</h1>

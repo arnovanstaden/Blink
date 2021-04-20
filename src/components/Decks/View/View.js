@@ -20,7 +20,7 @@ const View = () => {
     const { showLoader, hideLoader } = useContext(LoaderContext);
 
     // State
-    const [decks, setDecks] = useState(null);
+    const [decks, setDecks] = useState(undefined);
 
     // Data
     useEffect(() => {
@@ -44,6 +44,8 @@ const View = () => {
                 {decks && decks.map(deck => (
                     <DeckCard deck={deck} key={uuid()} />
                 ))}
+
+                {/* FIX THIS [No Decks] */}
             </Grid>
         </div>
     )

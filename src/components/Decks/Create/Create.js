@@ -103,7 +103,6 @@ const Create = () => {
                                 type="text"
                                 label="Category"
                                 inputRef={categoryRef}
-                                autoFocus
                                 variant="outlined"
                                 fullWidth />
                             <TextField

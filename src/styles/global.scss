@@ -29,6 +29,14 @@ a {
     text-decoration: none;
 }
 
+button,
+input,
+textarea {
+    font-family: $main-font;
+}
+
+
+
 .heading {
     margin-top: 0.5rem;
     margin-bottom: 1.5rem;

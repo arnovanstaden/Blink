@@ -9,3 +9,12 @@ export const validateForm = (e) => {
 
     return true
 }
+
+export const removeChildClass = (selector, classToRemove) => {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach(element => {
+        if (element.classList) {
+            element.classList.remove(classToRemove)
+        }
+    })
+}

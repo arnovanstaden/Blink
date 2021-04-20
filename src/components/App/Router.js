@@ -1,7 +1,6 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // Components
-import Nav from "../UI/Nav/Nav"
 import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
 import ResetPassword from "../Auth/ResetPassword";
@@ -14,7 +13,6 @@ import DeckCreate from "../Decks/Create/Create";
 const Router = () => {
     return (
         <BrowserRouter>
-            <Nav />
             <Switch>
                 <Route exact path="/">
                     <Dashboard />

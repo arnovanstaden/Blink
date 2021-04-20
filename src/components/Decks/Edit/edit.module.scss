@@ -1,0 +1,66 @@
+@import "../../../styles/variables.scss";
+
+.intro {
+    padding: 2rem 1rem 1rem 1rem;
+    background: $blue-gradient;
+
+    p {
+        color: $light-grey;
+    }
+
+    h1 {
+        color: $white;
+        font-weight: 500;
+        font-size: 1.75rem;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 2rem;
+
+        button {
+            margin: 0;
+            font-weight: 400;
+            color: $white;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: width 0.3s ease-out, background-color 0.3s ease;
+            -webkit-transition: width 0.3s ease-out, background-color 0.3s ease;
+            -moz-transition: width 0.3s ease-out, background-color 0.3s ease;
+            -ms-transition: width 0.3s ease-out, background-color 0.3s ease;
+            -o-transition: width 0.3s ease-out, background-color 0.3s ease;
+
+            &:after {
+                content: "";
+                display: block;
+                margin: auto;
+                height: 2px;
+                width: 0px;
+                background: transparent;
+                transition: width 0.3s ease-out, background-color 0.3s ease;
+                -webkit-transition: width 0.3s ease-out, background-color 0.3s ease;
+                -moz-transition: width 0.3s ease-out, background-color 0.3s ease;
+                -ms-transition: width 0.3s ease-out, background-color 0.3s ease;
+                -o-transition: width 0.3s ease-out, background-color 0.3s ease;
+            }
+
+            &.active {
+                font-weight: 500;
+
+                &:after {
+                    transition: width 0.3s ease-out, background-color 0.3s ease;
+                    -webkit-transition: width 0.3s ease-out, background-color 0.3s ease;
+                    -moz-transition: width 0.3s ease-out, background-color 0.3s ease;
+                    -ms-transition: width 0.3s ease-out, background-color 0.3s ease;
+                    -o-transition: width 0.3s ease-out, background-color 0.3s ease;
+                    width: 1.5rem;
+                    background: $white;
+                }
+            }
+        }
+    }
+}
