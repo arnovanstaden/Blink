@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 
 
 // Context
-import { UserContext } from "../../../context/UserContext"
 import { LoaderContext } from "../../../context/LoaderContext";
 
 // Components
@@ -27,7 +26,6 @@ const Create = () => {
     // Config
     const history = useHistory();
     const { enqueueSnackbar } = useSnackbar();
-    const { currentUser } = useContext(UserContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const nameRef = useRef();
     const descriptionRef = useRef();

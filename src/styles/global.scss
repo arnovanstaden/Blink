@@ -35,8 +35,6 @@ textarea {
     font-family: $main-font;
 }
 
-
-
 .heading {
     margin-top: 0.5rem;
     margin-bottom: 1.5rem;
@@ -59,6 +57,14 @@ textarea {
 }
 
 // Buttons
+
+.fab {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background: $blue-gradient;
+    color: $light-grey;
+}
 
 .button {
     padding: 0.5rem 2rem;

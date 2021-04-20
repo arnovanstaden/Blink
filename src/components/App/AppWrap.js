@@ -4,7 +4,6 @@ import { LoaderProvider } from "../../context/LoaderContext";
 
 // Components
 import NotificationsProvider from "../../components/UI/Notifications/Notifications";
-import Nav from "../../components/UI/Nav/Nav";
 import Router from "./Router";
 
 // MUI

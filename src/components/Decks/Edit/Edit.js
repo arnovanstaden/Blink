@@ -5,8 +5,13 @@ import { getDeck } from "../../../utils/decks";
 import { v4 as uuid } from "uuid";
 
 // Components
-import FAB from "../../UI/Library/FAB/FAB";
-import FlashCard from "../../FlashCards/Display/Card"
+// import FAB from "../../UI/Library/FAB/FAB";
+import Flashcard from "../../Flashcards/Display/Card"
+import FlashcardCreate from "../../Flashcards/Create/Create";
+import SlideUp from "../../UI/Library/Animations/SlideUp";
+
+// MUI
+import FAB from "@material-ui/core/Fab"
 
 // Icons
 import AddIcon from "@material-ui/icons/Add"
@@ -23,6 +28,7 @@ const Edit = () => {
     // State
     const [deck, setDeck] = useState(undefined);
     const [cards, setCards] = useState(undefined);
+    const [showFlashcardCreate, setShowFlashcardCreate] = useState(true);
 
     // Data
     useEffect(() => {
@@ -31,13 +37,17 @@ const Edit = () => {
             getDeck(id)
                 .then(result => {
                     setDeck(result.deck);
-                    setCards(result.cards)
+                    setCards(result.cards);
                 })
         } else {
             hideLoader()
         }
     }, [deck]);
 
+    // Handler
+    const handleShow = () => {
+        setShowFlashcardCreate(true)
+    }
 
 
     // Subcomponents
@@ -69,7 +79,7 @@ const Edit = () => {
         return (
             <>
                 {cards.map(card => (
-                    <FlashCard card={card} key={uuid()} />
+                    <Flashcard card={card} key={uuid()} />
                 ))}
             </>
         )
@@ -89,11 +99,16 @@ const Edit = () => {
                     : <About />}
 
                 <FAB
-                    tooltip="Manage Deck"
+                    className="fab"
+                    tooltip="Create New Flashcard"
+                    onClick={handleShow}
                 >
                     <AddIcon />
                 </FAB>
 
+                <SlideUp show={showFlashcardCreate}>
+                    <FlashcardCreate deckid={deck.id} show={setShowFlashcardCreate} />
+                </SlideUp>
             </div>
         )
     }

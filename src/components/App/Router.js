@@ -5,9 +5,10 @@ import SignIn from "../Auth/SignIn";
 import SignUp from "../Auth/SignUp";
 import ResetPassword from "../Auth/ResetPassword";
 import Dashboard from "../Dashboard/Dashboard";
-import DeckView from "../Decks/View/View";
+
 import DeckEdit from "../Decks/Edit/Edit";
 import DeckCreate from "../Decks/Create/Create";
+
 
 
 const Router = () => {

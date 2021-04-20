@@ -4,7 +4,6 @@ import Loader from "../components/UI/Loader/Loader"
 
 // MUI
 import Backdrop from "@material-ui/core/Backdrop";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from '@material-ui/core/styles';
 
 export const LoaderContext = createContext(null);

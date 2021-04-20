@@ -3,7 +3,6 @@ import { getUserDecks } from "../../../utils/decks";
 import { v4 as uuid } from "uuid";
 
 // Context
-import { UserContext } from "../../../context/UserContext"
 import { LoaderContext } from "../../../context/LoaderContext";
 
 // Components
@@ -16,7 +15,6 @@ import styles from "./view.module.scss";
 
 const View = () => {
     // Config
-    const { currentUser } = useContext(UserContext);
     const { showLoader, hideLoader } = useContext(LoaderContext);
 
     // State
@@ -28,7 +26,6 @@ const View = () => {
             showLoader("Preparing Your Dashboard");
             getUserDecks()
                 .then(result => {
-                    console.log(result)
                     setDecks(result)
                 })
         } else {

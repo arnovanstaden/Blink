@@ -2,7 +2,7 @@ import CardUI from "../../UI/Library/Card/Card";
 
 import styles from "./card.module.scss"
 
-const FlashCard = ({ card }) => {
+const Flashcard = ({ card }) => {
     return (
         <CardUI>
             <div className={styles.card}>
@@ -12,4 +12,4 @@ const FlashCard = ({ card }) => {
     )
 }
 
-export default FlashCard
+export default Flashcard
