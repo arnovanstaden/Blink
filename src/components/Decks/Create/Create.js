@@ -52,7 +52,6 @@ const Create = () => {
         }
 
         const data = {
-            user: currentUser.uid,
             name: nameRef.current.value,
             category: categoryRef.current.value,
             description: descriptionRef.current.value

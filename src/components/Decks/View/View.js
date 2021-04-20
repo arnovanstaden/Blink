@@ -26,8 +26,9 @@ const View = () => {
     useEffect(() => {
         if (!decks) {
             showLoader("Preparing Your Dashboard");
-            getUserDecks(currentUser.uid)
+            getUserDecks()
                 .then(result => {
+                    console.log(result)
                     setDecks(result)
                 })
         } else {
@@ -50,5 +51,7 @@ const View = () => {
         </div>
     )
 }
+
+
 
 export default View

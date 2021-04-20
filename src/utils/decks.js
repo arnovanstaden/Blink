@@ -8,6 +8,7 @@ const userRef = db.collection('users');
 
 export const createDeck = async (data) => {
     const uid = await auth.currentUser.uid;
+    data.uid = uid;
 
     const result = await userRef.doc(uid).collection("decks").add(data)
         .then((ref) => {
@@ -22,6 +23,8 @@ export const createDeck = async (data) => {
         })
     return result
 }
+
+
 
 export const getDeck = async (deckID) => {
     const uid = await auth.currentUser.uid;
@@ -47,7 +50,7 @@ export const getDeck = async (deckID) => {
 
 export const getUserDecks = async () => {
     const uid = await auth.currentUser.uid
-
+    console.log(uid)
     const querySnapshot = await db.collectionGroup('decks').where('uid', '==', uid).get();
     const result = querySnapshot.docs.map((doc) => ({
         id: doc.id,
