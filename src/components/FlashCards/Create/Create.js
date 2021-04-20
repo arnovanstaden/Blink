@@ -7,8 +7,9 @@ import { createFlashcard } from "../../../utils/flashcards";
 import { LoaderContext } from "../../../context/LoaderContext";
 
 // Components
-import Page from "../../UI/Library/Page/Page";
+import FullScreen from "../../UI/Library/FullScreen/FullScreen";
 import Button from "../../UI/Library/Button/Button";
+import BackButton from "../../UI/Library/BackButton/BackButton";
 
 // MUI
 import TextField from "@material-ui/core/TextField";
@@ -18,7 +19,7 @@ import Container from "@material-ui/core/Container";
 // Styles
 import styles from "./create.module.scss"
 
-const Create = ({ deckid, setCreatingFlashcard }) => {
+const Create = ({ deckid, toggle }) => {
 
     // Config
     const { enqueueSnackbar } = useSnackbar();
@@ -47,7 +48,7 @@ const Create = ({ deckid, setCreatingFlashcard }) => {
 
         createFlashcard(data)
             .then(result => {
-                setCreatingFlashcard(false)
+                toggle()
                 enqueueSnackbar(result.message, {
                     variant: 'success',
                 });
@@ -63,10 +64,10 @@ const Create = ({ deckid, setCreatingFlashcard }) => {
     }
 
     return (
-        <Page
-            title="Create Deck"
+        <FullScreen
             center
         >
+            <BackButton topLeft onClick={toggle} />
             <Container maxWidth="xs">
                 <div className={styles.create}>
                     <div className="heading center">
@@ -101,7 +102,7 @@ const Create = ({ deckid, setCreatingFlashcard }) => {
                 </div>
             </Container>
 
-        </Page>
+        </FullScreen>
     )
 }
 

@@ -7,9 +7,6 @@ import ResetPassword from "../Auth/ResetPassword";
 import Dashboard from "../Dashboard/Dashboard";
 
 import DeckEdit from "../Decks/Edit/Edit";
-import DeckCreate from "../Decks/Create/Create";
-
-
 
 const Router = () => {
     return (
@@ -31,9 +28,6 @@ const Router = () => {
                 </Route>
 
                 {/* Decks */}
-                <Route exact path="/decks/create">
-                    <DeckCreate />
-                </Route>
                 <Route path="/decks/:id">
                     <DeckEdit />
                 </Route>

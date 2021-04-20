@@ -1,8 +1,12 @@
+import { useState } from "react";
+
 // Components
 import Page from "../UI/Library/Page/Page";
 import FAB from "../UI/Library/FAB/FAB";
 import DecksView from "../Decks/View/View";
 import Nav from "../UI/Nav/Nav"
+import SlideUp from "../UI/Library/Animations/SlideUp";
+import DeckCreate from "../Decks/Create/Create";
 
 // Styles
 import styles from "./dashboard.module.scss";
@@ -11,6 +15,15 @@ import styles from "./dashboard.module.scss";
 import AddIcon from "@material-ui/icons/Add"
 
 const Dashboard = () => {
+
+    // State
+    const [showDeckCreate, setShowDeckCreate] = useState(false);
+
+    // Handler
+    const handleDeckToggle = () => {
+        setShowDeckCreate(prev => !prev)
+    }
+
     return (
         <Page
             title="Dashboard"
@@ -23,11 +36,16 @@ const Dashboard = () => {
                 </div>
                 <DecksView />
                 <FAB
-                    link="/decks/create"
+                    className="fab"
+                    onClick={handleDeckToggle}
                     tooltip="Create New Deck"
                 >
                     <AddIcon />
                 </FAB>
+
+                <SlideUp show={showDeckCreate}>
+                    <DeckCreate toggle={handleDeckToggle} />
+                </SlideUp>
             </main>
         </Page>
     )

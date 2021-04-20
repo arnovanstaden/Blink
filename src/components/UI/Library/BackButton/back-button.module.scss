@@ -1,0 +1,27 @@
+@import "../../../../styles/variables.scss";
+
+.button {
+
+    &.topLeft {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+    }
+
+    button {
+        color: $blue;
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+        -webkit-box-shadow: 3px 3px 30px -10px rgba(48, 123, 254, 0.5);
+        -moz-box-shadow: 3px 3px 30px -10px rgba(48, 123, 254, 0.5);
+        box-shadow: 3px 3px 30px -10px rgba(48, 123, 254, 0.5);
+        border: 0.5px solid rgba($color: $medium-grey, $alpha: 0.25);
+        transition: 0.4s ease-in-out;
+        box-sizing: border-box;
+        background-color: $light-grey;
+
+        svg {
+            vertical-align: middle;
+        }
+    }
+}

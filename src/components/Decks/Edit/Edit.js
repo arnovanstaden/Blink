@@ -1,17 +1,21 @@
 import { useState, useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { LoaderContext } from "../../../context/LoaderContext";
 import { useParams } from 'react-router-dom';
 import { getDeck } from "../../../utils/decks";
 import { v4 as uuid } from "uuid";
+
 
 // Components
 // import FAB from "../../UI/Library/FAB/FAB";
 import Flashcard from "../../Flashcards/Display/Card"
 import FlashcardCreate from "../../Flashcards/Create/Create";
 import SlideUp from "../../UI/Library/Animations/SlideUp";
+import BackButton from "../../UI/Library/BackButton/BackButton";
 
 // MUI
 import FAB from "@material-ui/core/Fab"
+import Container from "@material-ui/core/Container"
 
 // Icons
 import AddIcon from "@material-ui/icons/Add"
@@ -21,6 +25,7 @@ import styles from "./edit.module.scss";
 
 const Edit = () => {
     // Config
+    const history = useHistory();
     const { id } = useParams();
     const [tabOption, setTabOption] = useState("Cards");
     const { showLoader, hideLoader } = useContext(LoaderContext);
@@ -28,7 +33,7 @@ const Edit = () => {
     // State
     const [deck, setDeck] = useState(undefined);
     const [cards, setCards] = useState(undefined);
-    const [showFlashcardCreate, setShowFlashcardCreate] = useState(true);
+    const [showFlashcardCreate, setShowFlashcardCreate] = useState(false);
 
     // Data
     useEffect(() => {
@@ -45,8 +50,8 @@ const Edit = () => {
     }, [deck]);
 
     // Handler
-    const handleShow = () => {
-        setShowFlashcardCreate(true)
+    const handleCreateCardToggle = () => {
+        setShowFlashcardCreate(prev => !prev)
     }
 
 
@@ -68,10 +73,12 @@ const Edit = () => {
 
     const About = () => {
         return (
-            <div className={styles.about}>
-                <h5>Description</h5>
-                <p>{deck.description}</p>
-            </div>
+            <Container>
+                <div className={styles.about}>
+                    <h5>Description</h5>
+                    <p>{deck.description}</p>
+                </div>
+            </Container>
         )
     }
 
@@ -88,7 +95,9 @@ const Edit = () => {
     if (deck) {
         return (
             <div className={styles.edit}>
+
                 <div className={styles.intro}>
+                    <BackButton onClick={() => history.goBack()} />
                     <p>{deck.category}</p>
                     <h1>{deck.name}</h1>
                     <Menu />
@@ -101,14 +110,15 @@ const Edit = () => {
                 <FAB
                     className="fab"
                     tooltip="Create New Flashcard"
-                    onClick={handleShow}
+                    onClick={handleCreateCardToggle}
                 >
                     <AddIcon />
                 </FAB>
 
                 <SlideUp show={showFlashcardCreate}>
-                    <FlashcardCreate deckid={deck.id} show={setShowFlashcardCreate} />
+                    <FlashcardCreate deckid={deck.id} toggle={handleCreateCardToggle} />
                 </SlideUp>
+
             </div>
         )
     }

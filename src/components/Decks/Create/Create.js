@@ -9,8 +9,9 @@ import { useHistory } from "react-router-dom";
 import { LoaderContext } from "../../../context/LoaderContext";
 
 // Components
-import Page from "../../UI/Library/Page/Page";
 import Button from "../../UI/Library/Button/Button";
+import FullScreen from "../../UI/Library/FullScreen/FullScreen";
+import BackButton from "../../UI/Library/BackButton/BackButton";
 
 // MUI
 import TextField from "@material-ui/core/TextField";
@@ -21,7 +22,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 // Styles
 import styles from "./create.module.scss"
 
-const Create = () => {
+const Create = ({ toggle }) => {
 
     // Config
     const history = useHistory();
@@ -72,12 +73,11 @@ const Create = () => {
             })
     }
 
-
     return (
-        <Page
-            title="Create Deck"
+        <FullScreen
             center
         >
+            <BackButton topLeft onClick={toggle} />
             <Container maxWidth="xs">
                 <div className={styles.create}>
                     <div className="heading center">
@@ -130,7 +130,7 @@ const Create = () => {
                 </div>
             </Container>
 
-        </Page>
+        </FullScreen>
     )
 }
 
