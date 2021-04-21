@@ -16,7 +16,10 @@ const DeckCard = ({ deck }) => {
             <Link to={`/decks/${deck.id}`}>
                 <CardUI>
                     <div className={styles.card}>
-                        <p className={styles.category}>{deck.category}</p>
+                        <div className={styles.top}>
+                            <p className={styles.category}>{deck.category}</p>
+                            <p className={styles.count}>{deck.cardCount} Cards</p>
+                        </div>
                         <p className={styles.name}>{deck.name}</p>
                         <small>{deck.description}</small>
                     </div>

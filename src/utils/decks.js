@@ -9,6 +9,7 @@ const decksRef = (uid) => userRef.doc(uid).collection("decks");
 export const createDeck = async (data) => {
     const uid = await auth.currentUser.uid;
     data.uid = uid;
+    data.cardCount = 0;
 
     const result = await decksRef(uid).add(data)
         .then((ref) => {
@@ -56,5 +57,6 @@ export const getUserDecks = async () => {
         id: doc.id,
         ...doc.data(),
     }));
+
     return result
 }

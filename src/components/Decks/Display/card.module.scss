@@ -7,11 +7,23 @@
         border-width: 2px;
     }
 
-    .category {
-        color: $blue;
-        font-weight: 600;
-        font-size: 0.85rem;
-        margin: 0;
+    .top {
+        display: flex;
+        justify-content: space-between;
+
+        .category {
+            color: $blue;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .count {
+            color: $medium-grey;
+            font-weight: 300;
+            font-size: 0.85rem;
+            margin: 0;
+        }
     }
 
     .name {
