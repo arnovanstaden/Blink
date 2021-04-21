@@ -105,11 +105,17 @@ const Edit = () => {
 
     const Cards = () => {
         return (
-            <>
-                {cards.map(card => (
-                    <Flashcard card={card} key={uuid()} />
-                ))}
-            </>
+            <div className={styles.cards}>
+                <Container>
+                    <Grid container spacing={2}>
+                        {cards.map(card => (
+                            <Grid item key={uuid()} xs={12}>
+                                <Flashcard card={card} />
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
+            </div>
         )
     }
 

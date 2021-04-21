@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { auth } from "../config/firebase";
+import { createDbUser } from "../utils/user";
 
 export const UserContext = createContext(null);
 
@@ -26,6 +27,7 @@ export const UserProvider = ({ children }) => {
             .catch((error) => {
                 throw error
             });
+        await createDbUser(newUser)
         return newUser
     }
 

@@ -103,7 +103,6 @@ export default function SignUp() {
                                 type="text"
                                 label="Username"
                                 inputRef={displayNameRef} autoFocus
-                                center
                                 fullWidth />
                             <TextField
                                 variant="outlined"
@@ -112,7 +111,6 @@ export default function SignUp() {
                                 type="email"
                                 label="Email"
                                 inputRef={emailRef}
-                                center
                                 fullWidth />
                             <TextField
                                 variant="outlined"
@@ -121,7 +119,6 @@ export default function SignUp() {
                                 type="password"
                                 label="Password"
                                 inputRef={passwordRef}
-                                center
                                 fullWidth />
                             <Button fullWidth onClick={handleAuth}>Sign Up</Button>
                         </Grid>
