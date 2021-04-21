@@ -1,0 +1,19 @@
+@import "../../../../styles/variables.scss";
+
+.stat {
+    padding: 1rem 1.5rem;
+    background-color: rgba($color: $blue, $alpha: 0.1);
+    color: $blue;
+    border-radius: 0.5rem;
+
+    h4 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0rem 0 0.25rem 0;
+    }
+
+    p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+}

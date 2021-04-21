@@ -12,10 +12,12 @@ import Flashcard from "../../Flashcards/Display/Card"
 import FlashcardCreate from "../../Flashcards/Create/Create";
 import SlideUp from "../../UI/Library/Animations/SlideUp";
 import BackButton from "../../UI/Library/BackButton/BackButton";
+import Stat from "../../UI/Library/Stat/Stat";
 
 // MUI
 import FAB from "@material-ui/core/Fab"
 import Container from "@material-ui/core/Container"
+import Grid from "@material-ui/core/Grid"
 
 // Icons
 import AddIcon from "@material-ui/icons/Add"
@@ -77,6 +79,25 @@ const Edit = () => {
                 <div className={styles.about}>
                     <h5>Description</h5>
                     <p>{deck.description}</p>
+                    <Grid container className={styles.stats} spacing={2}>
+                        <Grid item>
+                            <Stat
+                                data={{
+                                    number: cards.length,
+                                    text: "Cards in Deck"
+                                }}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <Stat
+                                data={{
+                                    number: 15,
+                                    text: "Times Studied"
+                                }}
+                            />
+                        </Grid>
+
+                    </Grid>
                 </div>
             </Container>
         )
