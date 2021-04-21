@@ -15,7 +15,25 @@ export const createDeck = async (data) => {
         .then((ref) => {
             return {
                 id: ref.id,
-                message: "Deck Saved Successfully"
+                message: "Deck Created Successfully"
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            throw err.response.data;
+        })
+    return result
+}
+
+export const saveDeck = async (data) => {
+    const uid = await auth.currentUser.uid;
+    data.uid = uid;
+
+    const result = await decksRef(uid).update(data)
+        .then((ref) => {
+            return {
+                id: ref.id,
+                message: "Deck Updated Successfully"
             }
         })
         .catch(err => {

@@ -6,7 +6,7 @@ import SignUp from "../Auth/SignUp";
 import ResetPassword from "../Auth/ResetPassword";
 import Dashboard from "../Dashboard/Dashboard";
 
-import DeckEdit from "../Decks/Edit/Edit";
+import DeckView from "../Decks/View/View";
 
 const Router = () => {
     return (
@@ -29,7 +29,7 @@ const Router = () => {
 
                 {/* Decks */}
                 <Route path="/decks/:id">
-                    <DeckEdit />
+                    <DeckView />
                 </Route>
                 {/* <Route path="/learn/:id">
                     <DeckLearn />

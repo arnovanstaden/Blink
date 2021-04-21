@@ -3,10 +3,10 @@ import { useState } from "react";
 // Components
 import Page from "../UI/Library/Page/Page";
 import FAB from "../UI/Library/FAB/FAB";
-import DecksView from "../Decks/View/View";
+import DecksList from "../Decks/List/List";
 import Nav from "../UI/Nav/Nav"
 import SlideUp from "../UI/Library/Animations/SlideUp";
-import DeckCreate from "../Decks/Create/Create";
+import DeckManage from "../Decks/Manage/Manage";
 
 // Styles
 import styles from "./dashboard.module.scss";
@@ -34,7 +34,7 @@ const Dashboard = () => {
                 <div className="heading">
                     <h1>Dashboard</h1>
                 </div>
-                <DecksView />
+                <DecksList />
                 <FAB
                     className="fab"
                     onClick={handleDeckToggle}
@@ -44,7 +44,7 @@ const Dashboard = () => {
                 </FAB>
 
                 <SlideUp show={showDeckCreate}>
-                    <DeckCreate toggle={handleDeckToggle} />
+                    <DeckManage create toggle={handleDeckToggle} />
                 </SlideUp>
             </main>
         </Page>

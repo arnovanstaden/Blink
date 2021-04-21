@@ -17,9 +17,9 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 
 // Styles
-import styles from "./create.module.scss"
+import styles from "./manage.module.scss"
 
-const Create = ({ deckid, toggle }) => {
+const Create = ({ create, deckid, toggle, card }) => {
 
     // Config
     const { enqueueSnackbar } = useSnackbar();
@@ -27,7 +27,12 @@ const Create = ({ deckid, toggle }) => {
     const frontRef = useRef();
     const backRef = useRef();
 
-    // State
+    // Manage Type
+    const text = {
+        title: create ? "Create" : "Edit",
+        button: create ? "Create" : "Save",
+        loader: create ? "Creating New Card" : "Updating Card",
+    }
 
     // Handlers
 
@@ -71,7 +76,7 @@ const Create = ({ deckid, toggle }) => {
             <Container maxWidth="xs">
                 <div className={styles.create}>
                     <div className="heading center">
-                        <h1>Create Flashcard</h1>
+                        <h1>{text.title} Flashcard</h1>
                     </div>
                     <form name="create-deck-form" id="create-deck-form">
                         <Grid container spacing={2}>
@@ -81,6 +86,7 @@ const Create = ({ deckid, toggle }) => {
                                 type="text"
                                 label="Front"
                                 inputRef={frontRef}
+                                defaultValue={!create ? card.front : null}
                                 autoFocus
                                 variant="outlined"
                                 fullWidth
@@ -92,11 +98,12 @@ const Create = ({ deckid, toggle }) => {
                                 type="text"
                                 label="Back"
                                 inputRef={backRef}
+                                defaultValue={!create ? card.back : null}
                                 variant="outlined"
                                 fullWidth
                                 multiline
                                 rows={4} />
-                            <Button fullWidth onClick={handleCreate}>Create Flashcard</Button>
+                            <Button fullWidth onClick={handleCreate}>{text.button} Flashcard</Button>
                         </Grid>
                     </form>
                 </div>

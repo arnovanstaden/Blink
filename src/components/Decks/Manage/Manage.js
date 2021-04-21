@@ -1,7 +1,7 @@
 import { useRef, useContext, useState } from "react";
 import { useSnackbar } from 'notistack';
 import { validateForm } from "../../../utils/general"
-import { createDeck } from "../../../utils/decks";
+import { createDeck, saveDeck } from "../../../utils/decks";
 import { useHistory } from "react-router-dom";
 
 
@@ -20,9 +20,9 @@ import Container from "@material-ui/core/Container";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 // Styles
-import styles from "./create.module.scss"
+import styles from "./manage.module.scss"
 
-const Create = ({ toggle }) => {
+const Manage = ({ create, toggle, deck }) => {
 
     // Config
     const history = useHistory();
@@ -33,7 +33,15 @@ const Create = ({ toggle }) => {
     const categoryRef = useRef();
 
     // State
-    const [descLength, setDescLength] = useState(0);
+    const [descLength, setDescLength] = useState(create ? 99 : deck.description.length);
+
+    // Manage Type
+    const text = {
+        title: create ? "Create" : "Edit",
+        button: create ? "Create" : "Save",
+        loader: create ? "Creating New Deck" : "Updating Deck",
+
+    }
 
     // Handlers
     const handleDescChange = (event) => {
@@ -41,8 +49,8 @@ const Create = ({ toggle }) => {
         setDescLength(length)
     }
 
-    const handleCreate = (e) => {
-        showLoader("Creating new Deck")
+    const handleSave = (e) => {
+        showLoader(text.loader)
         if (!validateForm(e)) {
             hideLoader()
             return enqueueSnackbar("Please complete all the relevant fields", {
@@ -56,21 +64,41 @@ const Create = ({ toggle }) => {
             description: descriptionRef.current.value
         }
 
-        createDeck(data)
-            .then(result => {
-                history.push(`/decks/${result.id}`)
-                enqueueSnackbar(result.message, {
-                    variant: 'success',
-                });
-                hideLoader();
-            })
-            .catch(err => {
-                hideLoader();
-                enqueueSnackbar(err.message, {
-                    variant: 'error',
-                });
-                console.log(err)
-            })
+        if (create) {
+            createDeck(data)
+                .then(result => {
+                    history.push(`/decks/${result.id}`)
+                    enqueueSnackbar(result.message, {
+                        variant: 'success',
+                    });
+                    hideLoader();
+                })
+                .catch(err => {
+                    hideLoader();
+                    enqueueSnackbar(err.message, {
+                        variant: 'error',
+                    });
+                    console.log(err)
+                })
+        } else {
+            saveDeck(data)
+                .then(result => {
+                    history.push(`/decks/${result.id}`)
+                    enqueueSnackbar(result.message, {
+                        variant: 'success',
+                    });
+                    hideLoader();
+                })
+                .catch(err => {
+                    hideLoader();
+                    enqueueSnackbar(err.message, {
+                        variant: 'error',
+                    });
+                    console.log(err)
+                })
+        }
+
+
     }
 
     return (
@@ -81,7 +109,7 @@ const Create = ({ toggle }) => {
             <Container maxWidth="xs">
                 <div className={styles.create}>
                     <div className="heading center">
-                        <h1>Create Deck</h1>
+                        <h1>{text.title} Deck</h1>
                     </div>
                     <form name="create-deck-form" id="create-deck-form">
                         <Grid container spacing={2}>
@@ -91,6 +119,7 @@ const Create = ({ toggle }) => {
                                 type="text"
                                 label="Deck Name"
                                 inputRef={nameRef}
+                                defaultValue={!create ? deck.name : null}
                                 autoFocus
                                 variant="outlined"
                                 fullWidth />
@@ -100,6 +129,7 @@ const Create = ({ toggle }) => {
                                 type="text"
                                 label="Category"
                                 inputRef={categoryRef}
+                                defaultValue={!create ? deck.category : null}
                                 variant="outlined"
                                 fullWidth />
                             <TextField
@@ -108,6 +138,7 @@ const Create = ({ toggle }) => {
                                 type="text"
                                 label="Description"
                                 inputRef={descriptionRef}
+                                defaultValue={!create ? deck.description : null}
                                 variant="outlined"
                                 fullWidth
                                 multiline
@@ -124,7 +155,7 @@ const Create = ({ toggle }) => {
                                     ),
                                 }}
                             />
-                            <Button fullWidth onClick={handleCreate}>Create Deck</Button>
+                            <Button fullWidth onClick={handleSave}>{text.button} Deck</Button>
                         </Grid>
                     </form>
                 </div>
@@ -134,4 +165,4 @@ const Create = ({ toggle }) => {
     )
 }
 
-export default Create
+export default Manage
