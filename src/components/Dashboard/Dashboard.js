@@ -7,6 +7,10 @@ import DecksList from "../Decks/List/List";
 import Nav from "../UI/Nav/Nav"
 import SlideUp from "../UI/Library/Animations/SlideUp";
 import DeckManage from "../Decks/Manage/Manage";
+import Stat from "../UI/Library/Stat/Stat"
+
+// MUI
+import Grid from "@material-ui/core/Grid"
 
 // Styles
 import styles from "./dashboard.module.scss";
@@ -34,6 +38,25 @@ const Dashboard = () => {
                 <div className="heading">
                     <h1>Dashboard</h1>
                 </div>
+                <Grid container className={styles.stats} spacing={2}>
+                    <Grid item xs={6}>
+                        <Stat
+                            data={{
+                                number: 2,
+                                text: "Decks"
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Stat
+                            data={{
+                                number: 60,
+                                text: "Cards Studied"
+                            }}
+                        />
+                    </Grid>
+
+                </Grid>
                 <DecksList />
                 <FAB
                     className="fab"
@@ -46,6 +69,7 @@ const Dashboard = () => {
                 <SlideUp show={showDeckCreate}>
                     <DeckManage create toggle={handleDeckToggle} />
                 </SlideUp>
+
             </main>
         </Page>
     )

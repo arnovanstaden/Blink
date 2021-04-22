@@ -5,9 +5,13 @@ import { Link } from "react-router-dom"
 // Context
 import { UserContext } from "../../../context/UserContext";
 
-// Styles
+// MUi
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+// Styles & Media
 import styles from "./nav.module.scss"
 import logo from "../../../assets/images/logos/logo-light.svg";
+import dots from "../../../assets/icons/dots.svg"
 
 const Nav = () => {
 
@@ -40,7 +44,10 @@ const Nav = () => {
                     <img src={logo} alt="" />
                 </div>
             </Link>
-            <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleLogout}>
+                <ExitToAppIcon />
+                {/* <img src={dots} alt="" /> */}
+            </button>
         </nav>
     )
 }

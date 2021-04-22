@@ -52,7 +52,7 @@ export default function SignUp() {
 
         // Data
         const authData = {
-            email: emailRef.current.value.toLowerCase(),
+            email: emailRef.current.value.toLowerCase().trim(),
             password: passwordRef.current.value,
             displayName: displayNameRef.current.value,
         }

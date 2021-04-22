@@ -42,7 +42,7 @@ export default function ResetPassword() {
         }
 
         // Data
-        const email = emailRef.current.value.toLowerCase();
+        const email = emailRef.current.value.toLowerCase().trim();
 
         resetPassword(email)
             .then(data => {

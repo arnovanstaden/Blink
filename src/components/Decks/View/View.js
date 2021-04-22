@@ -14,6 +14,7 @@ import SlideUp from "../../UI/Library/Animations/SlideUp";
 import BackButton from "../../UI/Library/BackButton/BackButton";
 import Stat from "../../UI/Library/Stat/Stat";
 import FlashcardList from "../../Flashcards/List/List"
+
 // MUI
 import FAB from "@material-ui/core/Fab"
 import Container from "@material-ui/core/Container"
@@ -62,7 +63,6 @@ const View = () => {
         setShowDeckUpdate(prev => !prev)
     }
 
-
     // Subcomponents
     const Menu = () => {
 
@@ -86,7 +86,7 @@ const View = () => {
                     <h5>Description</h5>
                     <p>{deck.description}</p>
                     <Grid container className={styles.stats} spacing={2}>
-                        <Grid item>
+                        <Grid item xs={6}>
                             <Stat
                                 data={{
                                     number: cards.length,
@@ -94,7 +94,7 @@ const View = () => {
                                 }}
                             />
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={6}>
                             <Stat
                                 data={{
                                     number: 15,

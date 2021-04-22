@@ -46,8 +46,8 @@ const Create = ({ create, deckid, toggle, card }) => {
         }
 
         const data = {
-            front: frontRef.current.value,
-            back: backRef.current.value,
+            front: frontRef.current.value.trim(),
+            back: backRef.current.value.trim(),
             deckid
         }
 

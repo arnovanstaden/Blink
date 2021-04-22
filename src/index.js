@@ -6,7 +6,6 @@ import App from './components/App/App';
 import "./styles/global.scss";
 import "typeface-comfortaa";
 import "typeface-poppins"
-import "./assets/icons/style.css"
 
 ReactDOM.render(
   <React.StrictMode>

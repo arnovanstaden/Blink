@@ -1,0 +1,12 @@
+@import "../../../styles/variables.scss";
+
+.card {
+    position: relative;
+
+    .options {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.5rem;
+        color: $medium-grey;
+    }
+}

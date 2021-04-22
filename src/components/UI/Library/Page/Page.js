@@ -17,7 +17,6 @@ const Page = ({ children, className, title, center }) => {
     )
     return (
         <Container>
-
             <main className={classes}>
                 {children}
             </main>

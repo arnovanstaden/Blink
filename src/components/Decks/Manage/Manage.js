@@ -1,4 +1,4 @@
-import { useRef, useContext, useState } from "react";
+import { useRef, useContext, useState, useEffect } from "react";
 import { useSnackbar } from 'notistack';
 import { validateForm } from "../../../utils/general"
 import { createDeck, saveDeck } from "../../../utils/decks";
@@ -40,8 +40,10 @@ const Manage = ({ create, toggle, deck }) => {
         title: create ? "Create" : "Edit",
         button: create ? "Create" : "Save",
         loader: create ? "Creating New Deck" : "Updating Deck",
-
     }
+
+    // Intercept Back Button
+
 
     // Handlers
     const handleDescChange = (event) => {
@@ -59,9 +61,9 @@ const Manage = ({ create, toggle, deck }) => {
         }
 
         const data = {
-            name: nameRef.current.value,
-            category: categoryRef.current.value,
-            description: descriptionRef.current.value
+            name: nameRef.current.value.trim(),
+            category: categoryRef.current.value.trim(),
+            description: descriptionRef.current.value.trim()
         }
 
         if (create) {
@@ -81,13 +83,17 @@ const Manage = ({ create, toggle, deck }) => {
                     console.log(err)
                 })
         } else {
+            data.id = deck.id
             saveDeck(data)
                 .then(result => {
-                    history.push(`/decks/${result.id}`)
+                    //toggle()  Fix This - Hide + Show new data
+                    history.go(0)
+                    // history.push(`/decks/${result.id}`)
                     enqueueSnackbar(result.message, {
                         variant: 'success',
                     });
                     hideLoader();
+
                 })
                 .catch(err => {
                     hideLoader();

@@ -1,5 +1,5 @@
 // Styles
-import styles from "./card.module.scss";
+import styles from "./paper.module.scss";
 
 const Card = ({ children }) => {
     return (

@@ -28,19 +28,11 @@ export const createDeck = async (data) => {
 export const saveDeck = async (data) => {
     const uid = await auth.currentUser.uid;
     data.uid = uid;
-
-    const result = await decksRef(uid).update(data)
-        .then((ref) => {
-            return {
-                id: ref.id,
-                message: "Deck Updated Successfully"
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            throw err.response.data;
-        })
-    return result
+    await decksRef(uid).doc(data.id).update(data)
+    return {
+        id: data.id,
+        message: "Deck Updated Successfully"
+    }
 }
 
 

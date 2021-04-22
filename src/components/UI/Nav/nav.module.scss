@@ -4,13 +4,24 @@
     background-color: transparent;
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 1rem 0;
 
     .logo {
         cursor: pointer;
 
         img {
             width: 5rem;
+        }
+    }
+
+    button {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        cursor: pointer;
+
+        img {
+            width: 1.5rem;
         }
     }
 }
