@@ -1,8 +1,6 @@
-import { useContext, useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 
 // Context
-import { LoaderContext } from "../../../context/LoaderContext";
 
 // Components
 import Flashcard from "../Display/Card";
@@ -15,7 +13,6 @@ import styles from "./list.module.scss";
 
 const List = ({ cards }) => {
     // Config
-    const { showLoader, hideLoader } = useContext(LoaderContext);
 
     return (
         <div className={styles.list}>

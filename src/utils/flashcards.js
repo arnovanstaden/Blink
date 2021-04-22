@@ -14,13 +14,9 @@ const decrement = firebase.firestore.FieldValue.increment(-1);
 export const createFlashcard = async (data) => {
     const uid = await auth.currentUser.uid;
 
-    const incResult = await decksRef(uid).doc(data.deckid).update({
+    await decksRef(uid).doc(data.deckid).update({
         cardCount: increment
     })
-        .catch(err => {
-            console.log(err);
-            throw err.response.data;
-        })
 
     const result = await decksRef(uid).doc(data.deckid).collection("cards").add(data)
         .then((ref) => {

@@ -15,7 +15,7 @@ const BackButton = ({ onClick, topLeft }) => {
     return (
         <div className={classes}>
             <button onClick={onClick}>
-                <ChevronLeftIcon />
+                <ChevronLeftIcon className={styles.icon} />
             </button>
         </div >
     )

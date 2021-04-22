@@ -2,7 +2,6 @@ import React from 'react';
 import { Transition, animated } from "react-spring";
 
 const SlideUp = ({ children, show }) => {
-    const windowHeight = window.innerHeight
     return (
         <Transition
             items={show}

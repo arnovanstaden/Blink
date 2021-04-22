@@ -16,11 +16,12 @@ const Page = ({ children, className, title, center }) => {
         center ? styles.center : null
     )
     return (
-        <Container>
-            <main className={classes}>
+        <main className={classes}>
+            <Container>
                 {children}
-            </main>
-        </Container>
+            </Container>
+        </main>
+
     )
 }
 

@@ -1,0 +1,17 @@
+@import "../../styles/variables.scss";
+
+.learn {
+    min-height: 100vh;
+    width: 100vw;
+    background: $blue-gradient;
+    padding: 1rem 0;
+    box-sizing: border-box;
+
+    h1 {
+        margin: 1rem 0;
+        font-weight: 500;
+        color: $white;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+}

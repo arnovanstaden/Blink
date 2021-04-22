@@ -13,7 +13,8 @@ const Flashcard = ({ card }) => {
                 <div className={styles.options}>
                     <MoreVertIcon />
                 </div>
-                <div className={styles.card}>
+                <div className={styles.data}>
+                    <h3>Front</h3>
                     <p>{card.front}</p>
                 </div>
             </Paper>

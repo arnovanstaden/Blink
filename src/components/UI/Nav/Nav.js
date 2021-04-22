@@ -11,7 +11,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // Styles & Media
 import styles from "./nav.module.scss"
 import logo from "../../../assets/images/logos/logo-light.svg";
-import dots from "../../../assets/icons/dots.svg"
+// import dots from "../../../assets/icons/dots.svg"
 
 const Nav = () => {
 

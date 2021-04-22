@@ -1,35 +1,32 @@
 import { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { LoaderContext } from "../../../context/LoaderContext";
 import { useParams } from 'react-router-dom';
 import { getDeck } from "../../../utils/decks";
-import { v4 as uuid } from "uuid";
 
+// Context
+import { LoaderContext } from "../../../context/LoaderContext";
 
 // Components
-// import FAB from "../../UI/Library/FAB/FAB";
+import FAB from "../../UI/Library/FAB/FAB";
 import DeckManage from "../Manage/Manage";
 import FlashcardManage from "../../Flashcards/Manage/Manage";
 import SlideUp from "../../UI/Library/Animations/SlideUp";
-import BackButton from "../../UI/Library/BackButton/BackButton";
 import Stat from "../../UI/Library/Stat/Stat";
 import FlashcardList from "../../Flashcards/List/List"
 
 // MUI
-import FAB from "@material-ui/core/Fab"
 import Container from "@material-ui/core/Container"
 import Grid from "@material-ui/core/Grid"
 
 // Icons
 import AddIcon from "@material-ui/icons/Add"
 import EditIcon from "@material-ui/icons/Edit"
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 // Styles
 import styles from "./view.module.scss";
 
 const View = () => {
     // Config
-    const history = useHistory();
     const { id } = useParams();
     const [tabOption, setTabOption] = useState("Cards");
     const { showLoader, hideLoader } = useContext(LoaderContext);
@@ -40,7 +37,7 @@ const View = () => {
     const [showFlashcardCreate, setShowFlashcardCreate] = useState(false);
     const [showDeckUpdate, setShowDeckUpdate] = useState(false);
 
-    // Data
+    // Hooks
     useEffect(() => {
         if (!deck) {
             showLoader("Fetching Deck");
@@ -111,10 +108,9 @@ const View = () => {
 
     if (deck) {
         return (
-            <div className={styles.edit}>
+            <main className={styles.view}>
 
                 <div className={styles.intro}>
-                    <BackButton onClick={() => history.goBack()} />
                     <p>{deck.category}</p>
                     <h1>{deck.name}</h1>
                     <Menu />
@@ -124,6 +120,14 @@ const View = () => {
                     cards ?
                         <>
                             <FlashcardList cards={cards} />
+                            <FAB
+                                className="fab"
+                                tooltip="Learn"
+                                left={true}
+                                link={`/learn/${deck.id}`}
+                            >
+                                <PlayArrowIcon />
+                            </FAB>
                             <FAB
                                 className="fab"
                                 tooltip="Create New Flashcard"
@@ -157,7 +161,7 @@ const View = () => {
                     <DeckManage deck={deck} toggle={handleUpdateDeckToggle} />
                 </SlideUp>
 
-            </div>
+            </main>
         )
     }
 
