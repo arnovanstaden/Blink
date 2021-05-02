@@ -31,7 +31,7 @@ const Learn = () => {
     const [deck, setDeck] = useState(undefined);
     const [cards, setCards] = useState(undefined);
     const [position, setPosition] = useState(0);
-    const [revise, setRevise] = useState([])
+    const [revise, setRevise] = useState(undefined)
 
     // Hooks
     useEffect(() => {
@@ -49,16 +49,39 @@ const Learn = () => {
 
 
     // Handlers
+    const handleLearnEnd = (newRevise) => {
+        console.log(newRevise)
+    }
+
     const handleFlip = () => {
 
     }
 
-    const handleCorrect = () => {
+    const handleNextCard = (newRevise) => {
+        if (position + 1 < cards.length) {
+            setPosition(prevPos => prevPos + 1)
+        } else {
+            handleLearnEnd(newRevise)
+        }
+    }
 
+    const handleCorrect = () => {
+        handleNextCard()
     }
 
     const handleWrong = () => {
-
+        let newRevise;
+        if (!revise) {
+            newRevise = [cards[position]]
+            setRevise(newRevise);
+        } else {
+            newRevise = [...revise, cards[position]]
+            setRevise(newRevise);
+        }
+        // const newRevise = revise.push();
+        // console.log(newRevise)
+        // setRevise(newRevise)
+        handleNextCard(newRevise)
     }
 
     if (deck) {

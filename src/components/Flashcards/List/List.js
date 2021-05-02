@@ -11,7 +11,7 @@ import Container from "@material-ui/core/Container"
 
 import styles from "./list.module.scss";
 
-const List = ({ cards }) => {
+const List = ({ cards, deleteCard }) => {
     // Config
 
     return (
@@ -20,7 +20,7 @@ const List = ({ cards }) => {
                 <Grid container spacing={2}>
                     {cards.map(card => (
                         <Grid item key={uuid()} xs={12}>
-                            <Flashcard card={card} />
+                            <Flashcard card={card} deleteCard={deleteCard} />
                         </Grid>
                     ))}
                 </Grid>

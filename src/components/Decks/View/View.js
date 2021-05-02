@@ -66,6 +66,16 @@ const View = () => {
         setShowDeckUpdate(prev => !prev)
     }
 
+    const handleAddNewCard = (newCard) => {
+        const newCardsArray = [...cards, newCard]
+        setCards(newCardsArray)
+    }
+
+    const handleDeleteCard = (deleteCard) => {
+        const newCardsArray = cards.filter(card => card.id !== deleteCard.id)
+        setCards(newCardsArray)
+    }
+
     const handleDeleteDeck = () => {
         deleteDeck(deck.id)
             .then(result => {
@@ -155,7 +165,7 @@ const View = () => {
                 {tabOption === "Cards" ?
                     cards && cards.length > 0 ?
                         <>
-                            <FlashcardList cards={cards} />
+                            <FlashcardList cards={cards} deleteCard={handleDeleteCard} />
                             <FAB
                                 tooltip="Learn"
                                 left
@@ -183,7 +193,7 @@ const View = () => {
 
 
                 <SlideUp show={showFlashcardCreate}>
-                    <FlashcardManage create deckid={deck.id} toggle={handleCreateCardToggle} />
+                    <FlashcardManage create deckid={deck.id} toggle={handleCreateCardToggle} addCard={handleAddNewCard} />
                 </SlideUp>
 
                 <SlideUp show={showDeckUpdate}>

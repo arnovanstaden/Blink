@@ -21,6 +21,7 @@ export const createFlashcard = async (data) => {
     const result = await decksRef(uid).doc(data.deckid).collection("cards").add(data)
         .then((ref) => {
             return {
+                ...data,
                 id: ref.id,
                 message: "Flashcard Saved Successfully"
             }
@@ -29,7 +30,6 @@ export const createFlashcard = async (data) => {
             console.log(err);
             throw err.response.data;
         })
-
 
     return result
 }
@@ -44,7 +44,6 @@ export const saveFlashcard = async (data) => {
 }
 
 export const deleteFlashcard = async (data) => {
-    console.log(data)
     const uid = await auth.currentUser.uid;
 
     const result = await cardRef(uid, data.deckid, data.id).delete()
@@ -57,6 +56,10 @@ export const deleteFlashcard = async (data) => {
             console.log(err);
             throw err.response.data;
         })
+
+    await decksRef(uid).doc(data.deckid).update({
+        cardCount: decrement
+    })
 
     return result
 }

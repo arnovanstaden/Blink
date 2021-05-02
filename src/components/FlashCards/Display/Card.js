@@ -14,7 +14,7 @@ import MoreMenu from "../../UI/Library/MoreMenu/MoreMenu";
 
 import styles from "./card.module.scss"
 
-const Flashcard = ({ card }) => {
+const Flashcard = ({ card, deleteCard }) => {
     // Config
     const { enqueueSnackbar } = useSnackbar();
     const { showLoader, hideLoader } = useContext(LoaderContext);
@@ -40,6 +40,7 @@ const Flashcard = ({ card }) => {
     const handleDelete = () => {
         deleteFlashcard(card)
             .then(result => {
+                deleteCard(card)
                 enqueueSnackbar(result.message, {
                     variant: 'success',
                 });

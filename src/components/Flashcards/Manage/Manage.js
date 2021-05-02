@@ -19,7 +19,7 @@ import Container from "@material-ui/core/Container";
 // Styles
 import styles from "./manage.module.scss"
 
-const Create = ({ create, deckid, toggle, card }) => {
+const Create = ({ create, deckid, toggle, card, addCard }) => {
 
     // Config
     const { enqueueSnackbar } = useSnackbar();
@@ -54,6 +54,7 @@ const Create = ({ create, deckid, toggle, card }) => {
         if (create) {
             createFlashcard(data)
                 .then(result => {
+                    addCard(result)
                     toggle()
                     enqueueSnackbar(result.message, {
                         variant: 'success',
