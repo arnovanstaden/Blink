@@ -4,6 +4,7 @@
     .intro {
         padding: 2rem 1rem 1rem 1rem;
         background: $blue-gradient;
+        position: relative;
 
         p {
             color: $light-grey;
@@ -15,7 +16,7 @@
             font-size: 1.75rem;
         }
 
-        .menu {
+        .tabs {
             display: flex;
             justify-content: space-around;
             margin-top: 2rem;
@@ -63,6 +64,14 @@
                     }
                 }
             }
+        }
+
+        .options {
+            position: absolute;
+            top: 1rem;
+            right: 0.75rem;
+            color: $white;
+            cursor: pointer;
         }
     }
 

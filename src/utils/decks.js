@@ -68,3 +68,20 @@ export const getUserDecks = async () => {
 
     return result
 }
+
+export const deleteDeck = async (deckid) => {
+    const uid = await auth.currentUser.uid;
+
+    const result = await await decksRef(uid).doc(deckid).delete()
+        .then(() => {
+            return {
+                message: "Deck Deleted Successfully"
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            throw err.response.data;
+        })
+
+    return result
+}

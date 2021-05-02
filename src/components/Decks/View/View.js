@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import { getDeck } from "../../../utils/decks";
+import { getDeck, deleteDeck } from "../../../utils/decks";
+import { useSnackbar } from 'notistack';
+import { useHistory } from "react-router-dom";
 
 // Context
 import { LoaderContext } from "../../../context/LoaderContext";
@@ -11,7 +13,8 @@ import DeckManage from "../Manage/Manage";
 import FlashcardManage from "../../Flashcards/Manage/Manage";
 import SlideUp from "../../UI/Library/Animations/SlideUp";
 import Stat from "../../UI/Library/Stat/Stat";
-import FlashcardList from "../../Flashcards/List/List"
+import FlashcardList from "../../Flashcards/List/List";
+import MoreMenu from "../../UI/Library/MoreMenu/MoreMenu";
 
 // MUI
 import Container from "@material-ui/core/Container"
@@ -27,11 +30,14 @@ import styles from "./view.module.scss";
 
 const View = () => {
     // Config
+    const history = useHistory();
+
+    const { enqueueSnackbar } = useSnackbar();
     const { id } = useParams();
-    const [tabOption, setTabOption] = useState("Cards");
     const { showLoader, hideLoader } = useContext(LoaderContext);
 
     // State
+    const [tabOption, setTabOption] = useState("Cards");
     const [deck, setDeck] = useState(undefined);
     const [cards, setCards] = useState(undefined);
     const [showFlashcardCreate, setShowFlashcardCreate] = useState(false);
@@ -60,8 +66,24 @@ const View = () => {
         setShowDeckUpdate(prev => !prev)
     }
 
+    const handleDeleteDeck = () => {
+        deleteDeck(deck.id)
+            .then(result => {
+                enqueueSnackbar(result.message, {
+                    variant: 'success',
+                });
+                history.push('/')
+            })
+            .catch(err => {
+                enqueueSnackbar(err.message, {
+                    variant: 'error',
+                });
+                console.log(err)
+            })
+    }
+
     // Subcomponents
-    const Menu = () => {
+    const Tabs = () => {
 
         // Handlers
         const handleTabChange = (e) => {
@@ -69,7 +91,7 @@ const View = () => {
         }
 
         return (
-            <div className={styles.menu}>
+            <div className={styles.tabs}>
                 <button className={tabOption === "Cards" ? styles.active : null} onClick={handleTabChange}>Cards</button>
                 <button className={tabOption === "About" ? styles.active : null} onClick={handleTabChange}>About</button>
             </div>
@@ -113,7 +135,21 @@ const View = () => {
                 <div className={styles.intro}>
                     <p>{deck.category}</p>
                     <h1>{deck.name}</h1>
-                    <Menu />
+                    <Tabs />
+                    <div className={styles.options}>
+                        <MoreMenu
+                            menuItems={[
+                                {
+                                    text: "Edit Deck",
+                                    click: handleUpdateDeckToggle
+                                },
+                                {
+                                    text: "Delete Deck",
+                                    click: handleDeleteDeck
+                                }
+                            ]}
+                        />
+                    </div>
                 </div>
 
                 {tabOption === "Cards" ?

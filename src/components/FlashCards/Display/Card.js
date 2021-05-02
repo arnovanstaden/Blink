@@ -9,11 +9,8 @@ import { LoaderContext } from "../../../context/LoaderContext";
 import Paper from "../../UI/Library/Paper/Paper";
 import FlashcardManage from "../../Flashcards/Manage/Manage";
 import SlideUp from "../../UI/Library/Animations/SlideUp";
+import MoreMenu from "../../UI/Library/MoreMenu/MoreMenu";
 
-// MUI
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Menu from "@material-ui/core/Menu"
-import MenuItem from '@material-ui/core/MenuItem';
 
 import styles from "./card.module.scss"
 
@@ -46,10 +43,8 @@ const Flashcard = ({ card }) => {
                 enqueueSnackbar(result.message, {
                     variant: 'success',
                 });
-                hideLoader();
             })
             .catch(err => {
-                hideLoader();
                 enqueueSnackbar(err.message, {
                     variant: 'error',
                 });
@@ -62,17 +57,18 @@ const Flashcard = ({ card }) => {
         <div className={styles.card}>
             <Paper>
                 <div className={styles.options}>
-                    <MoreVertIcon onClick={handleClick} aria-controls="simple-menu" aria-haspopup="true" />
-                    <Menu
-                        id="simple-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                    >
-                        <MenuItem onClick={handleEditCardToggle}>Edit FlashCard</MenuItem>
-                        <MenuItem onClick={handleDelete}>Delete FlashCard</MenuItem>
-                    </Menu>
+                    <MoreMenu
+                        menuItems={[
+                            {
+                                text: "Edit FlashCard",
+                                click: handleEditCardToggle
+                            },
+                            {
+                                text: "Delete FlashCard",
+                                click: handleDelete
+                            }
+                        ]}
+                    />
                 </div>
                 <div className={styles.data}>
                     <h3>Front</h3>
