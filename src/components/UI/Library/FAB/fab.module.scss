@@ -1,13 +1,17 @@
 @import "../../../../styles/variables.scss";
 
 .fab {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
+
+    &.right {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+    }
 
     &.left {
-        right: unset;
+        position: fixed;
         left: 1rem;
+        bottom: 1rem;
     }
 
     button {
@@ -16,5 +20,11 @@
         border: none;
         background: $blue-gradient;
         color: $light-grey;
+    }
+
+    &.bordered button {
+        background: transparent;
+        border: $blue 2px solid;
+        color: $blue;
     }
 }

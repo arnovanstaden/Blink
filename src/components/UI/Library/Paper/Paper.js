@@ -1,12 +1,18 @@
+import ClassNames from "classnames"
+
 // Styles
 import styles from "./paper.module.scss";
 
-const Card = ({ children }) => {
+const Paper = ({ children, className }) => {
+    const classes = ClassNames(
+        styles.paper,
+        className ? className : null
+    )
     return (
-        <div className={styles.card}>
+        <div className={classes}>
             {children}
         </div>
     )
 }
 
-export default Card
+export default Paper

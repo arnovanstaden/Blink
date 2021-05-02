@@ -153,23 +153,15 @@ const View = () => {
                 </div>
 
                 {tabOption === "Cards" ?
-                    cards ?
+                    cards && cards.length > 0 ?
                         <>
                             <FlashcardList cards={cards} />
                             <FAB
-                                className="fab"
                                 tooltip="Learn"
-                                left={true}
+                                left
                                 link={`/learn/${deck.id}`}
                             >
                                 <PlayArrowIcon />
-                            </FAB>
-                            <FAB
-                                className="fab"
-                                tooltip="Create New Flashcard"
-                                onClick={handleCreateCardToggle}
-                            >
-                                <AddIcon />
                             </FAB>
                         </> :
                         // FIX THIS
@@ -177,16 +169,17 @@ const View = () => {
                     :
                     <>
                         <About />
-                        <FAB
-                            className="fab"
-                            tooltip="Edit Deck"
-                            onClick={handleUpdateDeckToggle}
-                        >
-                            <EditIcon />
-                        </FAB>
                     </>
                 }
 
+
+                <FAB
+                    right
+                    tooltip="Create New Flashcard"
+                    onClick={handleCreateCardToggle}
+                >
+                    <AddIcon />
+                </FAB>
 
 
                 <SlideUp show={showFlashcardCreate}>

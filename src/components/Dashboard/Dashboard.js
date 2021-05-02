@@ -11,6 +11,7 @@ import Stat from "../UI/Library/Stat/Stat"
 
 // MUI
 import Grid from "@material-ui/core/Grid"
+import Container from "@material-ui/core/Container"
 
 // Styles
 import styles from "./dashboard.module.scss";
@@ -33,44 +34,47 @@ const Dashboard = () => {
             title="Dashboard"
             className={styles.dashboard}
         >
-            <Nav />
-            <main className={styles.dashboard}>
-                <div className="heading">
-                    <h1>Dashboard</h1>
-                </div>
-                <Grid container className={styles.stats} spacing={2}>
-                    <Grid item xs={6} md={3}>
-                        <Stat
-                            data={{
-                                number: 2,
-                                text: "Decks"
-                            }}
-                        />
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                        <Stat
-                            data={{
-                                number: 60,
-                                text: "Cards Studied"
-                            }}
-                        />
-                    </Grid>
+            <Container>
+                <Nav />
+                <main className={styles.dashboard}>
+                    <div className="heading">
+                        <h1>Dashboard</h1>
+                    </div>
+                    <section className={styles.stats}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={6} md={3}>
+                                <Stat
+                                    data={{
+                                        number: 2,
+                                        text: "Decks"
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={6} md={3}>
+                                <Stat
+                                    data={{
+                                        number: 60,
+                                        text: "Cards Studied"
+                                    }}
+                                />
+                            </Grid>
+                        </Grid>
+                    </section>
+                    <DecksList />
+                    <FAB
+                        right
+                        onClick={handleDeckToggle}
+                        tooltip="Create New Deck"
+                    >
+                        <AddIcon />
+                    </FAB>
 
-                </Grid>
-                <DecksList />
-                <FAB
-                    className="fab"
-                    onClick={handleDeckToggle}
-                    tooltip="Create New Deck"
-                >
-                    <AddIcon />
-                </FAB>
+                    <SlideUp show={showDeckCreate}>
+                        <DeckManage create toggle={handleDeckToggle} />
+                    </SlideUp>
 
-                <SlideUp show={showDeckCreate}>
-                    <DeckManage create toggle={handleDeckToggle} />
-                </SlideUp>
-
-            </main>
+                </main>
+            </Container>
         </Page>
     )
 }

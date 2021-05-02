@@ -1,0 +1,23 @@
+@import "../../../styles/variables.scss";
+
+.card {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+    box-sizing: border-box;
+
+    .content {
+        text-align: center;
+        width: 100%;
+        max-height: 100%;
+
+        p {
+            font-weight: 600;
+            color: $grey;
+            font-size: 1.25rem;
+        }
+    }
+}

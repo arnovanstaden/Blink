@@ -2,11 +2,9 @@ import ClassNames from "classnames";
 
 // Components
 import withAuth from "../../../HOC/withAuth"
-import Container from "@material-ui/core/Container";
 
 // Styles
 import styles from "./page.module.scss"
-
 
 const Page = ({ children, className, title, center }) => {
 
@@ -17,9 +15,7 @@ const Page = ({ children, className, title, center }) => {
     )
     return (
         <main className={classes}>
-            <Container>
-                {children}
-            </Container>
+            {children}
         </main>
 
     )

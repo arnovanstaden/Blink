@@ -8,11 +8,13 @@ import Tooltip from "@material-ui/core/Tooltip";
 // Styles
 import styles from "./fab.module.scss";
 
-const FAB = ({ children, tooltip, onClick, link, left }) => {
+const FAB = ({ children, tooltip, onClick, link, left, right, bordered }) => {
 
     const classes = ClassNames(
         styles.fab,
-        left ? styles.left : null
+        left ? styles.left : null,
+        right ? styles.right : null,
+        bordered ? styles.bordered : null,
     )
 
     const Button = () => {
