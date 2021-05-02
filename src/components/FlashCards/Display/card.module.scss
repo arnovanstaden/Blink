@@ -5,9 +5,10 @@
 
     .options {
         position: absolute;
-        top: 0.75rem;
-        right: 0.5rem;
+        top: 1rem;
+        right: 0.75rem;
         color: $medium-grey;
+        cursor: pointer;
     }
 
     .data {

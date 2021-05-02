@@ -35,8 +35,6 @@ export const saveDeck = async (data) => {
     }
 }
 
-
-
 export const getDeck = async (deckID) => {
     const uid = await auth.currentUser.uid;
 

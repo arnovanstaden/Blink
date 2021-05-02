@@ -44,7 +44,6 @@ const Manage = ({ create, toggle, deck }) => {
 
     // Intercept Back Button
 
-
     // Handlers
     const handleDescChange = (event) => {
         const length = event.target.value.length

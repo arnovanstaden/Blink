@@ -5,11 +5,11 @@ import { auth } from "../config/firebase";
 // Firestore Refs
 const userRef = db.collection('users');
 const decksRef = (uid) => userRef.doc(uid).collection("decks");
+const cardRef = (uid, deckid, cardid) => decksRef(uid).doc(deckid).collection("cards").doc(cardid)
 
 // Operations
 const increment = firebase.firestore.FieldValue.increment(1);
 const decrement = firebase.firestore.FieldValue.increment(-1);
-
 
 export const createFlashcard = async (data) => {
     const uid = await auth.currentUser.uid;
@@ -30,6 +30,33 @@ export const createFlashcard = async (data) => {
             throw err.response.data;
         })
 
+
+    return result
+}
+
+export const saveFlashcard = async (data) => {
+    const uid = await auth.currentUser.uid;
+
+    await cardRef(uid, data.deckid, data.id).update(data)
+    return {
+        message: "FlashCard Updated Successfully"
+    }
+}
+
+export const deleteFlashcard = async (data) => {
+    console.log(data)
+    const uid = await auth.currentUser.uid;
+
+    const result = await cardRef(uid, data.deckid, data.id).delete()
+        .then(() => {
+            return {
+                message: "Flashcard Deleted Successfully"
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            throw err.response.data;
+        })
 
     return result
 }

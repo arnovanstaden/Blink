@@ -1,7 +1,7 @@
 import { useRef, useContext } from 'react';
 import { useSnackbar } from 'notistack';
 import { validateForm } from "../../../utils/general"
-import { createFlashcard } from "../../../utils/flashcards";
+import { createFlashcard, saveFlashcard } from "../../../utils/flashcards";
 
 // Context
 import { LoaderContext } from "../../../context/LoaderContext";
@@ -31,13 +31,13 @@ const Create = ({ create, deckid, toggle, card }) => {
     const text = {
         title: create ? "Create" : "Edit",
         button: create ? "Create" : "Save",
-        loader: create ? "Creating New Card" : "Updating Card",
+        loader: create ? "Creating New Flashcard" : "Updating Flashcard",
     }
 
     // Handlers
 
-    const handleCreate = (e) => {
-        showLoader("Creating new Flashcard")
+    const handleSave = (e) => {
+        showLoader(text.loader)
         if (!validateForm(e)) {
             hideLoader()
             return enqueueSnackbar("Please complete all the relevant fields", {
@@ -51,21 +51,41 @@ const Create = ({ create, deckid, toggle, card }) => {
             deckid
         }
 
-        createFlashcard(data)
-            .then(result => {
-                toggle()
-                enqueueSnackbar(result.message, {
-                    variant: 'success',
-                });
-                hideLoader();
-            })
-            .catch(err => {
-                hideLoader();
-                enqueueSnackbar(err.message, {
-                    variant: 'error',
-                });
-                console.log(err)
-            })
+        if (create) {
+            createFlashcard(data)
+                .then(result => {
+                    toggle()
+                    enqueueSnackbar(result.message, {
+                        variant: 'success',
+                    });
+                    hideLoader();
+                })
+                .catch(err => {
+                    hideLoader();
+                    enqueueSnackbar(err.message, {
+                        variant: 'error',
+                    });
+                    console.log(err)
+                })
+        } else {
+            data.id = card.id;
+            saveFlashcard(data)
+                .then(result => {
+                    toggle()  // Fix This - Hide + Show new data
+                    enqueueSnackbar(result.message, {
+                        variant: 'success',
+                    });
+                    hideLoader();
+
+                })
+                .catch(err => {
+                    hideLoader();
+                    enqueueSnackbar(err.message, {
+                        variant: 'error',
+                    });
+                    console.log(err)
+                })
+        }
     }
 
     return (
@@ -103,7 +123,7 @@ const Create = ({ create, deckid, toggle, card }) => {
                                 fullWidth
                                 multiline
                                 rows={4} />
-                            <Button fullWidth onClick={handleCreate}>{text.button} Flashcard</Button>
+                            <Button fullWidth onClick={handleSave}>{text.button} Flashcard</Button>
                         </Grid>
                     </form>
                 </div>

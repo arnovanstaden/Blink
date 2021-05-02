@@ -39,7 +39,7 @@ const Dashboard = () => {
                     <h1>Dashboard</h1>
                 </div>
                 <Grid container className={styles.stats} spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} md={3}>
                         <Stat
                             data={{
                                 number: 2,
@@ -47,7 +47,7 @@ const Dashboard = () => {
                             }}
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={6} md={3}>
                         <Stat
                             data={{
                                 number: 60,
