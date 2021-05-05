@@ -1,0 +1,30 @@
+@import "../../../../styles/variables.scss";
+
+.dial {
+
+    &.right {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    &.left {
+        position: fixed;
+        left: 1rem;
+        bottom: 1rem;
+    }
+
+    // button {
+    //     padding: 1.5rem;
+    //     border-radius: 50%;
+    //     border: none;
+    //     background: $blue-gradient;
+    //     color: $light-grey;
+    // }
+
+    // &.bordered button {
+    //     background: transparent;
+    //     border: $blue 2px solid;
+    //     color: $blue;
+    // }
+}

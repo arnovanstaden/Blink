@@ -22,6 +22,7 @@ const Flashcard = ({ card, deleteCard, editCard }) => {
     // State
     const [anchorEl, setAnchorEl] = useState(null);
     const [showCardEdit, setShowCardEdit] = useState(false);
+    const [showBack, setShowBack] = useState(false)
 
     // Handlers
     const handleClick = (event) => {
@@ -31,6 +32,10 @@ const Flashcard = ({ card, deleteCard, editCard }) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const handleShowBackToggle = () => {
+        setShowBack(prev => !prev);
+    }
 
     const handleEditCardToggle = () => {
         setShowCardEdit(prev => !prev);
@@ -65,15 +70,19 @@ const Flashcard = ({ card, deleteCard, editCard }) => {
                                 click: handleEditCardToggle
                             },
                             {
+                                text: showBack ? "Hide Back" : "Show Back",
+                                click: handleShowBackToggle
+                            },
+                            {
                                 text: "Delete FlashCard",
                                 click: handleDelete
                             }
                         ]}
                     />
                 </div>
-                <div className={styles.data}>
+                <div className={styles.content}>
                     <h3>{card.front}</h3>
-                    {/* <p></p> */}
+                    {showBack ? <p>{card.back}</p> : null}
                 </div>
             </Paper>
 

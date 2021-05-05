@@ -10,6 +10,7 @@ import { LoaderContext } from "../../../context/LoaderContext";
 import Flashcard from "../Display/Card";
 import FlashcardManage from "../../Flashcards/Manage/Manage";
 import FAB from "../../UI/Library/FAB/FAB";
+import SpeedDial from "../../UI/Library/SpeedDial/SpeedDial";
 import SlideUp from "../../UI/Library/Animations/SlideUp";
 
 // MUI
@@ -19,6 +20,7 @@ import Container from "@material-ui/core/Container"
 // Icons
 import AddIcon from "@material-ui/icons/Add"
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import ShuffleIcon from '@material-ui/icons/Shuffle';
 
 // Styles
 import styles from "./list.module.scss";
@@ -95,7 +97,7 @@ const List = ({ deck }) => {
                     <AddIcon />
                 </FAB>
 
-                {cards.length > 0 ?
+                {/* {cards.length > 0 ?
                     <FAB
                         tooltip="Learn"
                         left
@@ -103,7 +105,24 @@ const List = ({ deck }) => {
                     >
                         <PlayArrowIcon />
                     </FAB>
-                    : null}
+                    : null} */}
+
+
+                <SpeedDial
+                    left
+                    actions={[
+                        {
+                            icon: <PlayArrowIcon />,
+                            name: 'Learn',
+                            link: `/learn/${deck.id}`
+                        },
+                        {
+                            icon: <ShuffleIcon />,
+                            name: 'Shuffle Learn',
+                            link: `/learn/${deck.id}?shuffle`
+                        }
+                    ]}
+                />
 
                 <SlideUp show={showFlashcardManage}>
                     <FlashcardManage create deck_id={deck.id} toggle={handleCreateCardToggle} addCard={handleAddNewCard} />

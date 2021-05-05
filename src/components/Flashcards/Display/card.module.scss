@@ -2,6 +2,7 @@
 
 .card {
     position: relative;
+    cursor: pointer;
 
     .options {
         position: absolute;
@@ -11,12 +12,20 @@
         cursor: pointer;
     }
 
-    .data {
+    .content {
         padding: 0.5rem 0;
+        transition: 0.3s ease-in-out;
 
         h3 {
             margin: 0.25rem 0 0 0;
             font-size: 1.1rem;
+        }
+
+        p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: $medium-grey;
+            transition: 0.3s ease-in-out;
         }
     }
 }

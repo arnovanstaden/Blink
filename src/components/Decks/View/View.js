@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 import { LoaderContext } from "../../../context/LoaderContext";
 
 // Components
-import FAB from "../../UI/Library/FAB/FAB";
 import DeckManage from "../Manage/Manage";
 import SlideUp from "../../UI/Library/Animations/SlideUp";
 import Stat from "../../UI/Library/Stat/Stat";
