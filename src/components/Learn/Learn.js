@@ -40,18 +40,17 @@ const Learn = () => {
             showLoader("Preparing Deck");
             getDeck(id)
                 .then(result => {
-                    setDeck(result.deck);
+                    setDeck(result);
                 })
             getDeckCards(id)
                 .then(result => {
-                    setCards(result.cards);
+                    setCards(result);
                     hideLoader()
                 })
         } else {
             hideLoader()
         }
     }, [deck]);
-
 
     // Handlers
     const handleLearnEnd = (newRevise) => {

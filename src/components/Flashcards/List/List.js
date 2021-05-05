@@ -18,6 +18,7 @@ import Container from "@material-ui/core/Container"
 
 // Icons
 import AddIcon from "@material-ui/icons/Add"
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 // Styles
 import styles from "./list.module.scss";
@@ -36,12 +37,12 @@ const List = ({ deck }) => {
     useEffect(() => {
         if (!cards) {
             showLoader("Fetching Cards");
-            return getDeckCards(deck.id)
+            getDeckCards(deck.id)
                 .then(result => {
                     setCards(result);
                 })
         } else {
-            return hideLoader()
+            hideLoader()
         }
     }, [cards]);
 
@@ -67,37 +68,51 @@ const List = ({ deck }) => {
         setCards(newCardsArray)
     }
 
-    return (
-        <>
-            {cards && cards.length > 0 ?
-                <div className={styles.list}>
-                    <Container>
-                        <Grid container spacing={2}>
-                            {cards.map(card => (
-                                <Grid item key={uuid()} xs={12}>
-                                    <Flashcard card={card} editCard={handleEditCard} deleteCard={handleDeleteCard} />
-                                </Grid>
-                            ))}
-                        </Grid>
-                    </Container>
-                </div>
-                :  // FIX THIS
-                <p>You don't have any cards yet...</p>}
+    if (cards) {
+        return (
+            <>
+                {cards.length > 0 ?
+                    <div className={styles.list}>
+                        <Container>
+                            <Grid container spacing={2}>
+                                {cards.map(card => (
+                                    <Grid item key={uuid()} xs={12}>
+                                        <Flashcard card={card} editCard={handleEditCard} deleteCard={handleDeleteCard} />
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Container>
+                    </div>
+                    :  // FIX THIS
+                    <p>You don't have any cards yet...</p>}
 
 
-            <FAB
-                right
-                tooltip="Create New Flashcard"
-                onClick={handleCreateCardToggle}
-            >
-                <AddIcon />
-            </FAB>
+                <FAB
+                    right
+                    tooltip="Create New Flashcard"
+                    onClick={handleCreateCardToggle}
+                >
+                    <AddIcon />
+                </FAB>
 
-            <SlideUp show={showFlashcardManage}>
-                <FlashcardManage create deck_id={deck.id} toggle={handleCreateCardToggle} addCard={handleAddNewCard} />
-            </SlideUp>
-        </>
-    )
+                {cards.length > 0 ?
+                    <FAB
+                        tooltip="Learn"
+                        left
+                        link={`/learn/${deck.id}`}
+                    >
+                        <PlayArrowIcon />
+                    </FAB>
+                    : null}
+
+                <SlideUp show={showFlashcardManage}>
+                    <FlashcardManage create deck_id={deck.id} toggle={handleCreateCardToggle} addCard={handleAddNewCard} />
+                </SlideUp>
+            </>
+        )
+    }
+
+    return null
 }
 
 

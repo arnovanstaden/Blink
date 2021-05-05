@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef } from 'react';
 
 // Components
 import Paper from "../../UI/Library/Paper/Paper"
@@ -7,12 +7,25 @@ import Paper from "../../UI/Library/Paper/Paper"
 import styles from "./flip.module.scss";
 
 const Flip = ({ card }) => {
+
+    const cardRef = useRef();
+
+    const flipCard = () => {
+        const card = cardRef.current;
+        card.classList.toggle(styles.flip)
+    }
+
     return (
-        <Paper className={styles.card} >
+        <div className={styles.card} onClick={flipCard} ref={cardRef}>
             <div className={styles.content}>
-                <p>{card.front}</p>
+                <div className={styles.front}>
+                    <p>{card.front}</p>
+                </div>
+                <div className={styles.back}>
+                    <p>{card.back}</p>
+                </div>
             </div>
-        </Paper>
+        </div>
     )
 }
 

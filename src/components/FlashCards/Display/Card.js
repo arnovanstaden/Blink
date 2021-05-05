@@ -72,8 +72,8 @@ const Flashcard = ({ card, deleteCard, editCard }) => {
                     />
                 </div>
                 <div className={styles.data}>
-                    <h3>Front</h3>
-                    <p>{card.front}</p>
+                    <h3>{card.front}</h3>
+                    {/* <p></p> */}
                 </div>
             </Paper>
 

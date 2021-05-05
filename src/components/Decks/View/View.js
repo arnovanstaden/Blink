@@ -19,11 +19,6 @@ import MoreMenu from "../../UI/Library/MoreMenu/MoreMenu";
 import Container from "@material-ui/core/Container"
 import Grid from "@material-ui/core/Grid"
 
-// Icons
-import AddIcon from "@material-ui/icons/Add"
-import EditIcon from "@material-ui/icons/Edit"
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-
 // Styles
 import styles from "./view.module.scss";
 
@@ -146,22 +141,9 @@ const View = () => {
                 </div>
 
                 {tabOption === "Cards" ?
-                    <>
-                        <FlashcardList deck={deck} />
-                        {deck.cardCount > 0 ?
-                            <FAB
-                                tooltip="Learn"
-                                left
-                                link={`/learn/${deck.id}`}
-                            >
-                                <PlayArrowIcon />
-                            </FAB>
-                            : null}
-                    </>
+                    <FlashcardList deck={deck} />
                     :
-                    <>
-                        <About />
-                    </>
+                    <About />
                 }
 
                 <SlideUp show={showDeckUpdate}>
