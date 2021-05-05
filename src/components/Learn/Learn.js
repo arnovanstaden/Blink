@@ -1,6 +1,7 @@
 import { useParams, useHistory } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { getDeck } from "../../utils/decks";
+import { getDeckCards } from "../../utils/flashcards";
 
 
 // Context
@@ -36,11 +37,15 @@ const Learn = () => {
     // Hooks
     useEffect(() => {
         if (!deck) {
-            showLoader("Fetching Cards");
+            showLoader("Preparing Deck");
             getDeck(id)
                 .then(result => {
                     setDeck(result.deck);
+                })
+            getDeckCards(id)
+                .then(result => {
                     setCards(result.cards);
+                    hideLoader()
                 })
         } else {
             hideLoader()

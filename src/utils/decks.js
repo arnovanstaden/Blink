@@ -35,11 +35,10 @@ export const saveDeck = async (data) => {
     }
 }
 
-export const getDeck = async (deckID) => {
+export const getDeck = async (deck_id) => {
     const uid = await auth.currentUser.uid;
 
-    const result = {}
-    result.deck = await decksRef(uid).doc(deckID).get()
+    const result = await decksRef(uid).doc(deck_id).get()
         .then((doc) => {
             if (!doc) {
                 return undefined
@@ -50,11 +49,6 @@ export const getDeck = async (deckID) => {
             }
         });
 
-    const cardsQuerySnapshot = await decksRef(uid).doc(deckID).collection("cards").get()
-    result.cards = cardsQuerySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-    }));
     return result
 }
 
@@ -69,10 +63,10 @@ export const getUserDecks = async () => {
     return result
 }
 
-export const deleteDeck = async (deckid) => {
+export const deleteDeck = async (deck_id) => {
     const uid = await auth.currentUser.uid;
 
-    const result = await await decksRef(uid).doc(deckid).delete()
+    const result = await await decksRef(uid).doc(deck_id).delete()
         .then(() => {
             return {
                 message: "Deck Deleted Successfully"

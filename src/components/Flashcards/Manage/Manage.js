@@ -19,8 +19,7 @@ import Container from "@material-ui/core/Container";
 // Styles
 import styles from "./manage.module.scss"
 
-const Create = ({ create, deckid, toggle, card, addCard }) => {
-
+const Manage = ({ create, deck_id, toggle, card, addCard, editCard }) => {
     // Config
     const { enqueueSnackbar } = useSnackbar();
     const { showLoader, hideLoader } = useContext(LoaderContext);
@@ -48,7 +47,7 @@ const Create = ({ create, deckid, toggle, card, addCard }) => {
         const data = {
             front: frontRef.current.value.trim(),
             back: backRef.current.value.trim(),
-            deckid
+            deck_id
         }
 
         if (create) {
@@ -72,12 +71,12 @@ const Create = ({ create, deckid, toggle, card, addCard }) => {
             data.id = card.id;
             saveFlashcard(data)
                 .then(result => {
-                    toggle()  // Fix This - Hide + Show new data
+                    editCard(data)
+                    toggle();
                     enqueueSnackbar(result.message, {
                         variant: 'success',
                     });
                     hideLoader();
-
                 })
                 .catch(err => {
                     hideLoader();
@@ -134,4 +133,4 @@ const Create = ({ create, deckid, toggle, card, addCard }) => {
     )
 }
 
-export default Create
+export default Manage

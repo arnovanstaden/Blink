@@ -10,7 +10,6 @@ import { LoaderContext } from "../../../context/LoaderContext";
 // Components
 import FAB from "../../UI/Library/FAB/FAB";
 import DeckManage from "../Manage/Manage";
-import FlashcardManage from "../../Flashcards/Manage/Manage";
 import SlideUp from "../../UI/Library/Animations/SlideUp";
 import Stat from "../../UI/Library/Stat/Stat";
 import FlashcardList from "../../Flashcards/List/List";
@@ -40,7 +39,6 @@ const View = () => {
     const [tabOption, setTabOption] = useState("Cards");
     const [deck, setDeck] = useState(undefined);
     const [cards, setCards] = useState(undefined);
-    const [showFlashcardCreate, setShowFlashcardCreate] = useState(false);
     const [showDeckUpdate, setShowDeckUpdate] = useState(false);
 
     // Hooks
@@ -49,31 +47,16 @@ const View = () => {
             showLoader("Fetching Deck");
             getDeck(id)
                 .then(result => {
-                    setDeck(result.deck);
-                    setCards(result.cards);
+                    setDeck(result);
                 })
         } else {
             hideLoader()
         }
     }, [deck]);
 
-    // Handler
-    const handleCreateCardToggle = () => {
-        setShowFlashcardCreate(prev => !prev)
-    }
-
+    //  Handlers
     const handleUpdateDeckToggle = () => {
         setShowDeckUpdate(prev => !prev)
-    }
-
-    const handleAddNewCard = (newCard) => {
-        const newCardsArray = [...cards, newCard]
-        setCards(newCardsArray)
-    }
-
-    const handleDeleteCard = (deleteCard) => {
-        const newCardsArray = cards.filter(card => card.id !== deleteCard.id)
-        setCards(newCardsArray)
     }
 
     const handleDeleteDeck = () => {
@@ -118,7 +101,7 @@ const View = () => {
                         <Grid item xs={6}>
                             <Stat
                                 data={{
-                                    number: cards.length,
+                                    number: deck.cardCount,
                                     text: "Cards in Deck"
                                 }}
                             />
@@ -163,9 +146,9 @@ const View = () => {
                 </div>
 
                 {tabOption === "Cards" ?
-                    cards && cards.length > 0 ?
-                        <>
-                            <FlashcardList cards={cards} deleteCard={handleDeleteCard} />
+                    <>
+                        <FlashcardList deck={deck} />
+                        {deck.cardCount > 0 ?
                             <FAB
                                 tooltip="Learn"
                                 left
@@ -173,28 +156,13 @@ const View = () => {
                             >
                                 <PlayArrowIcon />
                             </FAB>
-                        </> :
-                        // FIX THIS
-                        <p>You don't have any cards yet...</p>
+                            : null}
+                    </>
                     :
                     <>
                         <About />
                     </>
                 }
-
-
-                <FAB
-                    right
-                    tooltip="Create New Flashcard"
-                    onClick={handleCreateCardToggle}
-                >
-                    <AddIcon />
-                </FAB>
-
-
-                <SlideUp show={showFlashcardCreate}>
-                    <FlashcardManage create deckid={deck.id} toggle={handleCreateCardToggle} addCard={handleAddNewCard} />
-                </SlideUp>
 
                 <SlideUp show={showDeckUpdate}>
                     <DeckManage deck={deck} toggle={handleUpdateDeckToggle} />

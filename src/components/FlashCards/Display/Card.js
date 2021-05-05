@@ -14,7 +14,7 @@ import MoreMenu from "../../UI/Library/MoreMenu/MoreMenu";
 
 import styles from "./card.module.scss"
 
-const Flashcard = ({ card, deleteCard }) => {
+const Flashcard = ({ card, deleteCard, editCard }) => {
     // Config
     const { enqueueSnackbar } = useSnackbar();
     const { showLoader, hideLoader } = useContext(LoaderContext);
@@ -78,7 +78,7 @@ const Flashcard = ({ card, deleteCard }) => {
             </Paper>
 
             <SlideUp show={showCardEdit}>
-                <FlashcardManage card={card} deckid={card.deckid} toggle={handleEditCardToggle} />
+                <FlashcardManage card={card} deck_id={card.deck_id} toggle={handleEditCardToggle} editCard={editCard} />
             </SlideUp>
         </div>
     )
