@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { getDeck } from "../../utils/decks";
 import { shuffleArray } from "../../utils/general";
 import { getDeckCards } from "../../utils/flashcards";
-
+import Slide from 'react-reveal/Slide';
 
 // Context
 import { LoaderContext } from "../../context/LoaderContext";
@@ -120,9 +120,14 @@ const Learn = () => {
                 </div>
 
                 <Container>
-                    <div className={styles.card}>
-                        {cards ? <Card card={cards[position]} /> : null}
-                    </div>
+                    <Slide right spy={position} duration={500}>
+
+                        <div className={styles.card}>
+                            {cards ?
+                                <Card card={cards[position]} />
+                                : null}
+                        </div>
+                    </Slide>
                 </Container>
 
 
