@@ -1,4 +1,5 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import Slide from 'react-reveal/Slide';
 
 // Components
 import Paper from "../../UI/Library/Paper/Paper"
@@ -11,21 +12,23 @@ const Flip = ({ card }) => {
     const cardRef = useRef();
 
     const flipCard = () => {
-        const card = cardRef.current;
-        card.classList.toggle(styles.flip)
+        const cardElem = cardRef.current;
+        cardElem.classList.toggle(styles.flip)
     }
 
     return (
-        <div className={styles.card} onClick={flipCard} ref={cardRef}>
-            <div className={styles.content}>
-                <div className={styles.front}>
-                    <p>{card.front}</p>
-                </div>
-                <div className={styles.back}>
-                    <p>{card.back}</p>
+        <Slide right spy={card} duration={500}>
+            <div className={styles.card} onClick={flipCard} ref={cardRef}>
+                <div className={styles.content}>
+                    <div className={styles.front}>
+                        <p>{card.front}</p>
+                    </div>
+                    <div className={styles.back}>
+                        <p>{card.back}</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Slide>
     )
 }
 

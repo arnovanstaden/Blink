@@ -66,6 +66,10 @@ const Learn = () => {
         }
     }, [deck]);
 
+    useEffect(() => {
+        console.log(position)
+    }, [position])
+
     // Handlers
     const handleLearnEnd = (newRevise) => {
         console.log(newRevise)
@@ -76,7 +80,7 @@ const Learn = () => {
     }
 
     const handleNextCard = (newRevise) => {
-        if (position + 1 < cards.length) {
+        if (position < cards.length - 1) {
             setPosition(prevPos => prevPos + 1)
         } else {
             handleLearnEnd(newRevise)
