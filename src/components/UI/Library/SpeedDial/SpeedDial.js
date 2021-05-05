@@ -57,6 +57,10 @@ const SpeedDial = ({ actions, left, right }) => {
                         tooltipOpen
                         onClick={() => handleLink(action.link)}
                         tooltipPlacement="right"
+                        classes={{
+                            staticTooltipLabel: styles.tooltip,
+                            fab: styles.fab
+                        }}
                     />
                 ))}
 

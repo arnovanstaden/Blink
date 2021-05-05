@@ -14,17 +14,12 @@
         bottom: 1rem;
     }
 
-    // button {
-    //     padding: 1.5rem;
-    //     border-radius: 50%;
-    //     border: none;
-    //     background: $blue-gradient;
-    //     color: $light-grey;
-    // }
+    .tooltip {
+        color: $grey;
+        white-space: nowrap;
+    }
 
-    // &.bordered button {
-    //     background: transparent;
-    //     border: $blue 2px solid;
-    //     color: $blue;
-    // }
+    .fab {
+        color: $blue;
+    }
 }

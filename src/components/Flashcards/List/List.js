@@ -119,7 +119,7 @@ const List = ({ deck }) => {
                         {
                             icon: <ShuffleIcon />,
                             name: 'Shuffle Learn',
-                            link: `/learn/${deck.id}?shuffle`
+                            link: `/learn/${deck.id}?type=shuffle`
                         }
                     ]}
                 />

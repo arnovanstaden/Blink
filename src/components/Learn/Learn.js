@@ -1,6 +1,7 @@
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { getDeck } from "../../utils/decks";
+import { shuffleArray } from "../../utils/general";
 import { getDeckCards } from "../../utils/flashcards";
 
 
@@ -22,7 +23,13 @@ import ClearIcon from '@material-ui/icons/Clear';
 // Styles
 import styles from "./learn.module.scss"
 
+// Custom Hooks
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
+
 const Learn = () => {
+
     // Config
     const history = useHistory()
     const { id } = useParams();
@@ -32,7 +39,8 @@ const Learn = () => {
     const [deck, setDeck] = useState(undefined);
     const [cards, setCards] = useState(undefined);
     const [position, setPosition] = useState(0);
-    const [revise, setRevise] = useState(undefined)
+    const [revise, setRevise] = useState(undefined);
+    const [learnType] = useState(useQuery().get("type"))
 
     // Hooks
     useEffect(() => {
@@ -44,7 +52,13 @@ const Learn = () => {
                 })
             getDeckCards(id)
                 .then(result => {
-                    setCards(result);
+                    if (learnType) {
+                        // shuffle cards
+                        const shuffledCards = shuffleArray(result)
+                        setCards(shuffledCards)
+                    } else {
+                        setCards(result);
+                    }
                     hideLoader()
                 })
         } else {
