@@ -86,7 +86,6 @@ export const deleteDeck = async (deck_id) => {
 }
 
 export const saveProgress = async (deck) => {
-    console.log(deck)
     const uid = await auth.currentUser.uid;
     await decksRef(uid).doc(deck.id).update({
         "stats.timesLearned": increment(1),
@@ -97,9 +96,24 @@ export const saveProgress = async (deck) => {
     }
 }
 
+export const giveUp = async (deck, cardsStudied) => {
+    const uid = await auth.currentUser.uid;
+    await decksRef(uid).doc(deck.id).update({
+        "stats.cardsStudied": increment(cardsStudied)
+    })
+    return {
+        message: "Progress saved"
+    }
+}
+
 
 // ----------------------------------
 // General
+
+export const getTotalCards = (decks) => {
+    const total = decks.reduce((acc, deck) => acc + deck.cardCount, 0);
+    return total
+}
 
 export const getTotalCardsStudied = (decks) => {
     const total = decks.reduce((acc, deck) => acc + (deck.stats ? deck.stats.cardsStudied : 0), 0)

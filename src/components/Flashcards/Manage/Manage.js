@@ -1,7 +1,9 @@
-import { useRef, useContext } from 'react';
+import { useRef, useContext, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { validateForm } from "../../../utils/general"
 import { createFlashcard, saveFlashcard } from "../../../utils/flashcards";
+import { Editor, EditorState } from 'draft-js';
+import 'draft-js/dist/Draft.css';
 
 // Context
 import { LoaderContext } from "../../../context/LoaderContext";
@@ -122,7 +124,7 @@ const Manage = ({ create, deck_id, toggle, card, addCard, editCard }) => {
                                 variant="outlined"
                                 fullWidth
                                 multiline
-                                rows={4} />
+                                rows={5} />
                             <Button fullWidth onClick={handleSave}>{text.button} Flashcard</Button>
                         </Grid>
                     </form>

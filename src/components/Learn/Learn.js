@@ -1,6 +1,6 @@
 import { useParams, useHistory, useLocation } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import { getDeck, saveProgress } from "../../utils/decks";
+import { getDeck, saveProgress, giveUp } from "../../utils/decks";
 import { shuffleArray, getPercentage } from "../../utils/general";
 import { getDeckCards } from "../../utils/flashcards";
 import Slide from 'react-reveal/Slide';
@@ -120,11 +120,16 @@ const Learn = () => {
         setPosition(0)
     }
 
-    // Utils
-    const getScore = () => {
-        const score = Math.round((cards.length - revise.length) / cards.length * 100);
-        console.log(score)
-        return score
+    const handleGiveUp = () => {
+        const cardsStudied = cards.length - revise.length
+        giveUp(deck, cardsStudied)
+            .then((result) => {
+                hideLoader();
+                enqueueSnackbar(result.message, {
+                    variant: 'success',
+                });
+                history.goBack()
+            })
     }
 
     // Render
@@ -184,7 +189,7 @@ const Learn = () => {
                     {revise.length > 0
                         ? <>
                             <button className="button button-alt"
-                                onClick={() => history.goBack()}
+                                onClick={handleGiveUp}
                             >Give Up</button>
                             <button className="button"
                                 onClick={handleRevise}

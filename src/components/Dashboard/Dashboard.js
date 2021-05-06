@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { getTotalCardsStudied, getUserDecks } from "../../utils/decks"
+import { getTotalCardsStudied, getUserDecks, getTotalCards } from "../../utils/decks"
 
 // Context
 import { LoaderContext } from "../../context/LoaderContext";
@@ -64,7 +64,7 @@ const Dashboard = () => {
                         </div>
                         <section className={styles.stats}>
                             <Grid container spacing={2}>
-                                <Grid item xs={6} md={3}>
+                                <Grid item xs={6} md={4}>
                                     <Stat
                                         data={{
                                             number: decks.length,
@@ -72,7 +72,15 @@ const Dashboard = () => {
                                         }}
                                     />
                                 </Grid>
-                                <Grid item xs={6} md={3}>
+                                <Grid item xs={6} md={4}>
+                                    <Stat
+                                        data={{
+                                            number: getTotalCards(decks),
+                                            text: "Cards"
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs={6} md={4}>
                                     <Stat
                                         data={{
                                             number: getTotalCardsStudied(decks),
