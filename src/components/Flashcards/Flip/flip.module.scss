@@ -26,16 +26,24 @@
         border: 0.25px solid rgba(122, 141, 156, 0.25);
         @include box-shadow;
 
-        p {
-            font-weight: 600;
-            color: $grey;
-            font-size: 1.25rem;
+        .front {
+            p {
+                font-weight: 600;
+                color: $grey;
+                font-size: 1.25rem;
+                white-space: pre-line;
+            }
         }
-
-        .front {}
 
         .back {
             transform: rotateY(180deg);
+
+            p {
+                font-weight: 400;
+                color: $grey;
+                font-size: 1rem;
+                white-space: pre-line;
+            }
         }
 
         .front,
