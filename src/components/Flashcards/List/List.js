@@ -2,6 +2,7 @@ import { v4 as uuid } from "uuid";
 import { useState, useContext, useEffect } from "react";
 import { useSnackbar } from 'notistack';
 import { getDeckCards } from "../../../utils/flashcards";
+import { Slide } from "react-reveal"
 
 // Context
 import { LoaderContext } from "../../../context/LoaderContext";
@@ -76,13 +77,15 @@ const List = ({ deck }) => {
                 {cards.length > 0 ?
                     <div className={styles.list}>
                         <Container>
-                            <Grid container spacing={2}>
-                                {cards.map(card => (
-                                    <Grid item key={uuid()} xs={12}>
-                                        <Flashcard card={card} editCard={handleEditCard} deleteCard={handleDeleteCard} />
-                                    </Grid>
-                                ))}
-                            </Grid>
+                            <Slide up cascade duration={500}>
+                                <Grid container spacing={2} >
+                                    {cards.map(card => (
+                                        <Grid item key={uuid()} xs={12}>
+                                            <Flashcard card={card} editCard={handleEditCard} deleteCard={handleDeleteCard} />
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            </Slide>
                         </Container>
                     </div>
                     :  // FIX THIS
@@ -96,17 +99,6 @@ const List = ({ deck }) => {
                 >
                     <AddIcon />
                 </FAB>
-
-                {/* {cards.length > 0 ?
-                    <FAB
-                        tooltip="Learn"
-                        left
-                        link={`/learn/${deck.id}`}
-                    >
-                        <PlayArrowIcon />
-                    </FAB>
-                    : null} */}
-
 
                 <SpeedDial
                     left

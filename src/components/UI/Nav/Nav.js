@@ -7,11 +7,12 @@ import { UserContext } from "../../../context/UserContext";
 
 // MUi
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Container from "@material-ui/core/Container"
+
 
 // Styles & Media
 import styles from "./nav.module.scss"
 import logo from "../../../assets/images/logos/logo-light.svg";
-// import dots from "../../../assets/icons/dots.svg"
 
 const Nav = () => {
 
@@ -39,15 +40,19 @@ const Nav = () => {
 
     return (
         <nav className={styles.nav}>
-            <Link to="/">
-                <div className={styles.logo}>
-                    <img src={logo} alt="" />
+            <Container>
+                <div className={styles.links}>
+                    <Link to="/">
+                        <div className={styles.logo}>
+                            <img src={logo} alt="" />
+                        </div>
+                    </Link>
+                    <button onClick={handleLogout}>
+                        <ExitToAppIcon />
+                        {/* <img src={dots} alt="" /> */}
+                    </button>
                 </div>
-            </Link>
-            <button onClick={handleLogout}>
-                <ExitToAppIcon />
-                {/* <img src={dots} alt="" /> */}
-            </button>
+            </Container>
         </nav>
     )
 }

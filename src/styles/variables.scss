@@ -16,7 +16,13 @@ $blue-gradient: linear-gradient(90deg, rgba(48, 125, 254, 1) 0%, rgba(29, 88, 25
 }
 
 @mixin box-shadow {
-    -webkit-box-shadow: 3px 3px 30px -10px rgba(48, 123, 254, 0.5);
-    -moz-box-shadow: 3px 3px 30px -10px rgba(48, 123, 254, 0.5);
-    box-shadow: 3px 3px 30px -10px rgba(48, 123, 254, 0.5);
+    -webkit-box-shadow: 3px 3px 25px -15px rgba($blue, 0.3);
+    -moz-box-shadow: 3px 3px 25px -15px rgba($blue, 0.3);
+    box-shadow: 3px 3px 25px -15px rgba($blue, 0.3);
+}
+
+@mixin box-shadow-grey {
+    -webkit-box-shadow: 3px 3px 30px -10px rgba($grey, 0.3);
+    -moz-box-shadow: 3px 3px 30px -10px rgba($grey, 0.3);
+    box-shadow: 3px 3px 30px -10px rgba($grey, 0.3);
 }

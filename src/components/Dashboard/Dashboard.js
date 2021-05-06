@@ -8,7 +8,6 @@ import { LoaderContext } from "../../context/LoaderContext";
 import Page from "../UI/Library/Page/Page";
 import FAB from "../UI/Library/FAB/FAB";
 import DecksList from "../Decks/List/List";
-import Nav from "../UI/Nav/Nav"
 import SlideUp from "../UI/Library/Animations/SlideUp";
 import DeckManage from "../Decks/Manage/Manage";
 import Stat from "../UI/Library/Stat/Stat"
@@ -57,7 +56,6 @@ const Dashboard = () => {
                 className={styles.dashboard}
             >
                 <Container>
-                    <Nav />
                     <main className={styles.dashboard}>
                         <div className="heading">
                             <h1>Dashboard</h1>
@@ -68,15 +66,7 @@ const Dashboard = () => {
                                     <Stat
                                         data={{
                                             number: decks.length,
-                                            text: "Decks"
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={6} md={4}>
-                                    <Stat
-                                        data={{
-                                            number: getTotalCards(decks),
-                                            text: "Cards"
+                                            text: "Decks Created"
                                         }}
                                     />
                                 </Grid>

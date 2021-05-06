@@ -1,4 +1,5 @@
 import { v4 as uuid } from "uuid";
+import { Slide } from "react-reveal"
 
 // Components
 import DeckCard from "../Display/Card";
@@ -16,13 +17,16 @@ const List = ({ decks }) => {
             <div className="heading">
                 <h2>Your Decks</h2>
             </div>
-            <Grid container spacing={3} className={styles.grid}>
-                {decks && decks.map(deck => (
-                    <DeckCard deck={deck} key={uuid()} />
-                ))}
+            <Slide up cascade duration={500}>
 
-                {/* FIX THIS [No Decks] */}
-            </Grid>
+                <Grid container spacing={3} className={styles.grid}>
+                    {decks && decks.map(deck => (
+                        <DeckCard deck={deck} key={uuid()} />
+                    ))}
+
+                    {/* FIX THIS [No Decks] */}
+                </Grid>
+            </Slide>
         </div>
     )
 }

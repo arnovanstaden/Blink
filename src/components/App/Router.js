@@ -7,12 +7,14 @@ import ResetPassword from "../Auth/ResetPassword";
 import Dashboard from "../Dashboard/Dashboard";
 import DeckView from "../Decks/View/View";
 import Learn from "../Learn/Learn"
+import Nav from "../UI/Nav/Nav"
 
 const Router = () => {
     return (
         <BrowserRouter>
             <Switch>
                 <Route exact path="/">
+                    <Nav />
                     <Dashboard />
                 </Route>
 
