@@ -3,9 +3,7 @@
 .paper {
     padding: 1rem 2rem;
     border-radius: 1rem;
-    -webkit-box-shadow: 3px 3px 50px -30px rgba(48, 123, 254, 0.5);
-    -moz-box-shadow: 3px 3px 50px -30px rgba(48, 123, 254, 0.5);
-    box-shadow: 3px 3px 50px -30px rgba(48, 123, 254, 0.5);
+    @include box-shadow;
     border: 0.25px solid rgba($color: $medium-grey, $alpha: 0.25);
     background-color: $white;
     transition: 0.4s ease-in-out;

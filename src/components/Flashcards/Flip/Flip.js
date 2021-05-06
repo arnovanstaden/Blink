@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import Slide from 'react-reveal/Slide';
 
 // Styles
 import styles from "./flip.module.scss";

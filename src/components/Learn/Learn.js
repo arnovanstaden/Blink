@@ -12,7 +12,8 @@ import { LoaderContext } from "../../context/LoaderContext";
 import Page from "../UI/Library/Page/Page";
 import BackButton from "../UI/Library/BackButton/BackButton";
 import FAB from "../UI/Library/FAB/FAB";
-import Card from "../Flashcards/Flip/Flip"
+import Card from "../Flashcards/Flip/Flip";
+import Modal from "../UI/Modal/Modal";
 
 // MUI
 import Container from "@material-ui/core/Container";
@@ -39,7 +40,8 @@ const Learn = () => {
     const [deck, setDeck] = useState(undefined);
     const [cards, setCards] = useState(undefined);
     const [position, setPosition] = useState(0);
-    const [revise, setRevise] = useState(undefined);
+    const [revise, setRevise] = useState([]);
+    const [end, setEnd] = useState(false)
     const [learnType] = useState(useQuery().get("type"))
 
     // Hooks
@@ -67,23 +69,18 @@ const Learn = () => {
     }, [deck]);
 
     useEffect(() => {
-        console.log(position)
-    }, [position])
+        console.log("Game End");
+        console.log(revise);
+        console.log(cards);
 
-    // Handlers
-    const handleLearnEnd = (newRevise) => {
-        console.log(newRevise)
-    }
+    }, [end])
 
-    const handleFlip = () => {
-
-    }
 
     const handleNextCard = (newRevise) => {
         if (position < cards.length - 1) {
             setPosition(prevPos => prevPos + 1)
         } else {
-            handleLearnEnd(newRevise)
+            setEnd(true)
         }
     }
 
@@ -100,11 +97,28 @@ const Learn = () => {
             newRevise = [...revise, cards[position]]
             setRevise(newRevise);
         }
-        // const newRevise = revise.push();
-        // console.log(newRevise)
-        // setRevise(newRevise)
         handleNextCard(newRevise)
     }
+
+    const handleSaveProgress = () => {
+        history.goBack()
+    }
+
+    const handleRevise = () => {
+        setEnd(false);
+        setCards(revise);
+        setRevise([]);
+        setPosition(0)
+    }
+
+    // Utils
+    const getScore = () => {
+        const score = Math.round((cards.length - revise.length) / cards.length * 100);
+        console.log(score)
+        return score
+    }
+
+    // Render
 
     if (deck) {
         return (
@@ -120,7 +134,7 @@ const Learn = () => {
                 </div>
 
                 <Container>
-                    <Slide right spy={position} duration={500}>
+                    <Slide right spy={position} duration={400}>
 
                         <div className={styles.card}>
                             {cards ?
@@ -151,7 +165,27 @@ const Learn = () => {
                             </FAB>
                         </Grid>
                     </Grid>
-                </div >
+                </div>
+
+                <Modal status={end}
+                    content={{
+                        heading: revise.length > 0 ? "Almost There" : "All Done!",
+                        text: revise.length > 0 ? `You got ${getScore()}%. Do you want to revise ${revise.length} card${revise.length > 1 ? "s" : ""}?` : "Well done! You have successfully learned 100% of the cards in this deck."
+                    }}>
+                    {revise.length > 0
+                        ? <>
+                            <button className="button button-alt"
+                                onClick={() => history.goBack()}
+                            >Give Up</button>
+                            <button className="button"
+                                onClick={handleRevise}
+                            >Revise ({revise.length})</button>
+                        </>
+                        : <button className="button"
+                            onClick={handleSaveProgress}
+                        >Save Progress</button>
+                    }
+                </Modal>
             </Page >
         )
     }

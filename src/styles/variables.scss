@@ -8,3 +8,15 @@ $grey: #2c2b30;
 $white: #ffffff;
 $blue: #307dfe;
 $blue-gradient: linear-gradient(90deg, rgba(48, 125, 254, 1) 0%, rgba(29, 88, 251, 1) 100%);
+
+@mixin reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@mixin box-shadow {
+    -webkit-box-shadow: 3px 3px 30px -10px rgba(48, 123, 254, 0.5);
+    -moz-box-shadow: 3px 3px 30px -10px rgba(48, 123, 254, 0.5);
+    box-shadow: 3px 3px 30px -10px rgba(48, 123, 254, 0.5);
+}
