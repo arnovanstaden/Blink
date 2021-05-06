@@ -1,11 +1,16 @@
 import { db } from "../config/firebase";
 import { auth } from "../config/firebase";
-
+import firebase from "firebase/app";
 
 // Firestore Refs
 const userRef = db.collection('users');
 const decksRef = (uid) => userRef.doc(uid).collection("decks");
 
+// Operations
+const increment = (value) => firebase.firestore.FieldValue.increment(value);
+
+
+// CRUD
 export const createDeck = async (data) => {
     const uid = await auth.currentUser.uid;
     data.uid = uid;
@@ -78,4 +83,25 @@ export const deleteDeck = async (deck_id) => {
         })
 
     return result
+}
+
+export const saveProgress = async (deck) => {
+    console.log(deck)
+    const uid = await auth.currentUser.uid;
+    await decksRef(uid).doc(deck.id).update({
+        "stats.timesLearned": increment(1),
+        "stats.cardsStudied": increment(deck.cardCount)
+    })
+    return {
+        message: "Progress saved"
+    }
+}
+
+
+// ----------------------------------
+// General
+
+export const getTotalCardsStudied = (decks) => {
+    const total = decks.reduce((acc, deck) => acc + (deck.stats ? deck.stats.cardsStudied : 0), 0)
+    return total
 }

@@ -1,9 +1,10 @@
 import { useParams, useHistory, useLocation } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import { getDeck } from "../../utils/decks";
-import { shuffleArray } from "../../utils/general";
+import { getDeck, saveProgress } from "../../utils/decks";
+import { shuffleArray, getPercentage } from "../../utils/general";
 import { getDeckCards } from "../../utils/flashcards";
 import Slide from 'react-reveal/Slide';
+import { useSnackbar } from 'notistack';
 
 // Context
 import { LoaderContext } from "../../context/LoaderContext";
@@ -35,6 +36,7 @@ const Learn = () => {
     const history = useHistory()
     const { id } = useParams();
     const { showLoader, hideLoader } = useContext(LoaderContext);
+    const { enqueueSnackbar } = useSnackbar();
 
     // State
     const [deck, setDeck] = useState(undefined);
@@ -101,7 +103,14 @@ const Learn = () => {
     }
 
     const handleSaveProgress = () => {
-        history.goBack()
+        showLoader("Saving Progress")
+        saveProgress(deck).then((result) => {
+            hideLoader();
+            enqueueSnackbar(result.message, {
+                variant: 'success',
+            });
+            history.goBack()
+        })
     }
 
     const handleRevise = () => {
@@ -170,7 +179,7 @@ const Learn = () => {
                 <Modal status={end}
                     content={{
                         heading: revise.length > 0 ? "Almost There" : "All Done!",
-                        text: revise.length > 0 ? `You got ${getScore()}%. Do you want to revise ${revise.length} card${revise.length > 1 ? "s" : ""}?` : "Well done! You have successfully learned 100% of the cards in this deck."
+                        text: revise.length > 0 ? `You got ${getPercentage(revise.length, cards.length)}%. Do you want to revise ${revise.length} card${revise.length > 1 ? "s" : ""}?` : "Well done! You have successfully learned 100% of the cards in this deck."
                     }}>
                     {revise.length > 0
                         ? <>

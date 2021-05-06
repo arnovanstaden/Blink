@@ -28,3 +28,8 @@ export const shuffleArray = (array) => {
     }
     return array
 }
+
+export const getPercentage = (amount, total) => {
+    const percentage = Math.round((total - amount) / total * 100);
+    return percentage
+}

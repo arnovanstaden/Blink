@@ -103,7 +103,7 @@ const View = () => {
                         <Grid item xs={6}>
                             <Stat
                                 data={{
-                                    number: 15,
+                                    number: deck.stats ? deck.stats.timesLearned : 0,
                                     text: "Times Studied"
                                 }}
                             />
