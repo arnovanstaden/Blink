@@ -108,7 +108,7 @@ const View = () => {
                         <Grid item xs={6}>
                             <Stat
                                 data={{
-                                    number: deck.cardCount,
+                                    number: cards.length,
                                     text: "Cards in Deck"
                                 }}
                             />

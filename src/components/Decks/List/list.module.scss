@@ -1,1 +1,10 @@
-.list {}
+@import "../../../styles/variables.scss";
+
+.list {
+    hr {
+        background-color: rgba($color: $medium-grey, $alpha: 0.5);
+        border: none;
+        height: 1px;
+        margin-bottom: 2rem;
+    }
+}

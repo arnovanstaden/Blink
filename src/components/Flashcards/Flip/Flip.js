@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 // Styles
 import styles from "./flip.module.scss";
@@ -11,6 +11,17 @@ const Flip = ({ card }) => {
         const cardElem = cardRef.current;
         cardElem.classList.toggle(styles.flip)
     }
+
+    const flipToFront = () => {
+        const cardElem = cardRef.current;
+        if (cardElem.classList) {
+            cardElem.classList.remove(styles.flip)
+        }
+    }
+
+    useEffect(() => {
+        flipToFront()
+    })
 
     return (
         <div className={styles.card} onClick={flipCard} ref={cardRef}>
