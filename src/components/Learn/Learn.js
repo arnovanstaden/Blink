@@ -43,10 +43,12 @@ const Learn = () => {
     const [cards, setCards] = useState(undefined);
     const [position, setPosition] = useState(0);
     const [revise, setRevise] = useState([]);
-    const [end, setEnd] = useState(false)
+    const [end, setEnd] = useState(false);
     const [learnType] = useState(useQuery().get("type"))
 
     // Hooks
+
+    // Get Data
     useEffect(() => {
         if (!deck) {
             showLoader("Preparing Deck");

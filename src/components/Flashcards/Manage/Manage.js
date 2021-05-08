@@ -1,9 +1,7 @@
-import { useRef, useContext, useState } from 'react';
+import { useRef, useContext } from 'react';
 import { useSnackbar } from 'notistack';
 import { validateForm } from "../../../utils/general"
 import { createFlashcard, saveFlashcard } from "../../../utils/flashcards";
-import { Editor, EditorState } from 'draft-js';
-import 'draft-js/dist/Draft.css';
 
 // Context
 import { LoaderContext } from "../../../context/LoaderContext";
