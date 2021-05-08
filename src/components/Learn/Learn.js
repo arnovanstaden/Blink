@@ -1,12 +1,15 @@
 import { useParams, useHistory, useLocation } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { getDeck, saveProgress, giveUp } from "../../utils/decks";
 import { shuffleArray, getPercentage } from "../../utils/general";
 import { saveLearnProgress, getLearnProgress, deleteLearnProgress } from "../../utils/learn";
 import { getDeckCards } from "../../utils/flashcards";
 import Slide from 'react-reveal/Slide';
 import { useSnackbar } from 'notistack';
-
+import ClassNames from "classnames";
+import {
+    isMobile
+} from "react-device-detect";
 // Context
 import { LoaderContext } from "../../context/LoaderContext";
 
@@ -20,6 +23,9 @@ import Modal from "../UI/Modal/Modal";
 // MUI
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
+
+// Icons
+import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 
@@ -34,7 +40,8 @@ function useQuery() {
 const Learn = () => {
 
     // Config
-    const history = useHistory()
+    const history = useHistory();
+    const introRef = useRef()
     const { id } = useParams();
     const { showLoader, hideLoader } = useContext(LoaderContext);
     const { enqueueSnackbar } = useSnackbar();
@@ -150,12 +157,22 @@ const Learn = () => {
             })
     }
 
+    const handleFullScreen = () => {
+        introRef.current.classList.toggle(styles.hide)
+    }
+
+    // Styles
+    const introStyles = ClassNames(
+        styles.intro,
+        isMobile ? styles.mobile : null
+    )
+
     // Render
 
     if (deck) {
         return (
             <Page className={styles.learn}>
-                <div className={styles.intro}>
+                <div className={introStyles} ref={introRef}>
                     <Container>
                         <div className={styles.top}>
                             <BackButton onClick={() => history.goBack()} />
@@ -166,6 +183,9 @@ const Learn = () => {
                 </div>
 
                 <Container>
+                    <div className={styles.fullscreen}>
+                        <FullscreenIcon onClick={handleFullScreen} />
+                    </div>
                     <Slide right spy={position} duration={400}>
 
                         <div className={styles.card}>
