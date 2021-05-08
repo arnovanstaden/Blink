@@ -1,4 +1,4 @@
-# Blink Flashvards
+# Blink Flashcards
 A PWA App for Learning using the spaced repetition principle in the form of flashcards
 
 ## Link
