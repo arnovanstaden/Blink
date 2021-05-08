@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 // Utils
 import { getDeck, deleteDeck } from "../../../utils/decks";
 import { getDeckCards } from "../../../utils/flashcards";
+import { deleteLearnProgress } from "../../../utils/learn";
 
 // Context
 import { LoaderContext } from "../../../context/LoaderContext";
@@ -45,6 +46,7 @@ const View = () => {
 
     // Hooks
     useEffect(() => {
+        deleteLearnProgress()
         if (!deck) {
             showLoader("Fetching Deck");
             getDeck(id)
