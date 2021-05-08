@@ -14,10 +14,10 @@ const List = ({ decks }) => {
 
     return (
         <div className={styles.list}>
-            {/* <div className="heading">
+            <div className="heading">
                 <h2>Your Decks</h2>
-            </div> */}
-            <hr />
+            </div>
+            {/* <hr /> */}
             <Slide up cascade duration={500}>
 
                 <Grid container spacing={3} className={styles.grid}>
