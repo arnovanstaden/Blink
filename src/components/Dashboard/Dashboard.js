@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { getTotalCardsStudied, getUserDecks, getTotalCards } from "../../utils/decks"
+import withAuth from "../HOC/withAuth"
 
 // Context
 import { LoaderContext } from "../../context/LoaderContext";
@@ -103,4 +104,4 @@ const Dashboard = () => {
 
 }
 
-export default Dashboard
+export default withAuth(Dashboard);
