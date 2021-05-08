@@ -1,17 +1,13 @@
 import { v4 as uuid } from "uuid";
-import { useState, useContext, useEffect } from "react";
-import { useSnackbar } from 'notistack';
-import { getDeckCards } from "../../../utils/flashcards";
+import { useState } from "react";
 import { Slide } from "react-reveal"
 
 // Context
-import { LoaderContext } from "../../../context/LoaderContext";
 
 // Components
 import Flashcard from "../Display/Card";
 import FlashcardManage from "../../Flashcards/Manage/Manage";
 import FAB from "../../UI/Library/FAB/FAB";
-import SpeedDial from "../../UI/Library/SpeedDial/SpeedDial";
 import SlideUp from "../../UI/Library/Animations/SlideUp";
 
 // MUI
@@ -20,34 +16,13 @@ import Container from "@material-ui/core/Container"
 
 // Icons
 import AddIcon from "@material-ui/icons/Add"
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import ShuffleIcon from '@material-ui/icons/Shuffle';
 
 // Styles
 import styles from "./list.module.scss";
 
-const List = ({ deck }) => {
-    // Config
-
-    const { enqueueSnackbar } = useSnackbar();
-    const { showLoader, hideLoader } = useContext(LoaderContext);
-
+const List = ({ deck, cards, setCards }) => {
     // State
-    const [cards, setCards] = useState(undefined);
     const [showFlashcardManage, setShowFlashcardManage] = useState(false);
-
-    // Hooks
-    useEffect(() => {
-        if (!cards) {
-            showLoader("Fetching Cards");
-            getDeckCards(deck.id)
-                .then(result => {
-                    setCards(result);
-                })
-        } else {
-            hideLoader()
-        }
-    }, [cards]);
 
     // Handler
     const handleCreateCardToggle = () => {
@@ -99,22 +74,6 @@ const List = ({ deck }) => {
                 >
                     <AddIcon />
                 </FAB>
-
-                <SpeedDial
-                    left
-                    actions={[
-                        {
-                            icon: <PlayArrowIcon />,
-                            name: 'Learn',
-                            link: `/learn/${deck.id}`
-                        },
-                        {
-                            icon: <ShuffleIcon />,
-                            name: 'Shuffle Learn',
-                            link: `/learn/${deck.id}?type=shuffle`
-                        }
-                    ]}
-                />
 
                 <SlideUp show={showFlashcardManage}>
                     <FlashcardManage create deck_id={deck.id} toggle={handleCreateCardToggle} addCard={handleAddNewCard} />

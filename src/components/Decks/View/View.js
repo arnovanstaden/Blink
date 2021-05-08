@@ -1,8 +1,11 @@
 import { useState, useContext, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import { getDeck, deleteDeck } from "../../../utils/decks";
 import { useSnackbar } from 'notistack';
 import { useHistory } from "react-router-dom";
+
+// Utils
+import { getDeck, deleteDeck } from "../../../utils/decks";
+import { getDeckCards } from "../../../utils/flashcards";
 
 // Context
 import { LoaderContext } from "../../../context/LoaderContext";
@@ -13,10 +16,15 @@ import SlideUp from "../../UI/Library/Animations/SlideUp";
 import Stat from "../../UI/Library/Stat/Stat";
 import FlashcardList from "../../Flashcards/List/List";
 import MoreMenu from "../../UI/Library/MoreMenu/MoreMenu";
+import SpeedDial from "../../UI/Library/SpeedDial/SpeedDial";
 
 // MUI
 import Container from "@material-ui/core/Container"
 import Grid from "@material-ui/core/Grid"
+
+// Icons
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import ShuffleIcon from '@material-ui/icons/Shuffle';
 
 // Styles
 import styles from "./view.module.scss";
@@ -42,6 +50,11 @@ const View = () => {
             getDeck(id)
                 .then(result => {
                     setDeck(result);
+                })
+            getDeckCards(id)
+                .then(result => {
+                    setCards(result);
+                    hideLoader()
                 })
         } else {
             hideLoader()
@@ -140,7 +153,26 @@ const View = () => {
                 </div>
 
                 {tabOption === "Cards" ?
-                    <FlashcardList deck={deck} />
+                    <>
+                        <FlashcardList deck={deck} cards={cards} setCards={setCards} />
+                        {cards && cards.length > 0 ?
+                            <SpeedDial
+                                left
+                                actions={[
+                                    {
+                                        icon: <PlayArrowIcon />,
+                                        name: 'Learn',
+                                        link: `/learn/${deck.id}`
+                                    },
+                                    {
+                                        icon: <ShuffleIcon />,
+                                        name: 'Shuffle Learn',
+                                        link: `/learn/${deck.id}?type=shuffle`
+                                    }
+                                ]}
+                            />
+                            : null}
+                    </>
                     :
                     <About />
                 }

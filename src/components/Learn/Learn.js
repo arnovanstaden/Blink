@@ -103,6 +103,7 @@ const Learn = () => {
     }
 
     const handleSaveProgress = () => {
+        setEnd(false)
         showLoader("Saving Progress")
         saveProgress(deck).then((result) => {
             hideLoader();
