@@ -21,12 +21,22 @@
             font-size: 1.1rem;
         }
 
-        p {
-            font-size: 0.9rem;
-            font-weight: 300;
-            color: $medium-grey;
+        .back {
+            height: 0;
+            overflow: hidden;
             transition: 0.3s ease-in-out;
-            white-space: pre-line;
+
+            p {
+                font-size: 0.9rem;
+                font-weight: 300;
+                color: $medium-grey;
+                white-space: pre-line;
+                margin-bottom: 0;
+            }
+
+            &.showBack {
+                height: auto;
+            }
         }
     }
 }

@@ -60,7 +60,7 @@ const Flashcard = ({ card, deleteCard, editCard }) => {
     }
 
     return (
-        <div className={styles.card}>
+        <div className={styles.card} onClick={handleShowBackToggle}>
             <Paper>
                 <div className={styles.options}>
                     <MoreMenu
@@ -68,10 +68,6 @@ const Flashcard = ({ card, deleteCard, editCard }) => {
                             {
                                 text: "Edit FlashCard",
                                 click: handleEditCardToggle
-                            },
-                            {
-                                text: showBack ? "Hide Back" : "Show Back",
-                                click: handleShowBackToggle
                             },
                             {
                                 text: "Delete FlashCard",
@@ -82,7 +78,9 @@ const Flashcard = ({ card, deleteCard, editCard }) => {
                 </div>
                 <div className={styles.content}>
                     <h3>{card.front}</h3>
-                    {showBack ? <p>{card.back}</p> : null}
+                    <div className={`${showBack ? styles.showBack : null} ${styles.back}`}>
+                        <p>{card.back}</p>
+                    </div>
                 </div>
             </Paper>
 
