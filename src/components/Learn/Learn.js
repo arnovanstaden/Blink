@@ -2,6 +2,7 @@ import { useParams, useHistory, useLocation } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { getDeck, saveProgress, giveUp } from "../../utils/decks";
 import { shuffleArray, getPercentage } from "../../utils/general";
+import { saveLearnProgress, getLearnProgress, deleteLearnProgress } from "../../utils/learn";
 import { getDeckCards } from "../../utils/flashcards";
 import Slide from 'react-reveal/Slide';
 import { useSnackbar } from 'notistack';
@@ -54,35 +55,49 @@ const Learn = () => {
                 .then(result => {
                     setDeck(result);
                 })
-            getDeckCards(id)
-                .then(result => {
-                    if (learnType) {
-                        // shuffle cards
-                        const shuffledCards = shuffleArray(result)
-                        setCards(shuffledCards)
-                    } else {
-                        setCards(result);
-                    }
-                    hideLoader()
-                })
+            // Check For Progress
+            const progress = getLearnProgress()
+            if (progress) {
+                setEnd(progress.end)
+                setCards(progress.cards);
+                setPosition(progress.position);
+                setRevise(progress.revise)
+            }
+            else {
+                getDeckCards(id)
+                    .then(result => {
+                        if (learnType) {
+                            // shuffle cards
+                            const shuffledCards = shuffleArray(result)
+                            setCards(shuffledCards)
+                        } else {
+                            setCards(result);
+                        }
+                        hideLoader()
+                    })
+            }
         } else {
             hideLoader()
         }
     }, [deck]);
 
-    useEffect(() => {
-        console.log("Game End");
-        console.log(revise);
-        console.log(cards);
-
-    }, [end])
-
-
     const handleNextCard = (newRevise) => {
+        let newPos = position;
+        const progress = {
+            position: position,
+            revise: newRevise ? newRevise : revise,
+            cards: cards,
+            end: false
+        }
         if (position < cards.length - 1) {
-            setPosition(prevPos => prevPos + 1)
+            newPos += 1;
+            setPosition(newPos);
+            progress.position = newPos;
+            saveLearnProgress(progress)
         } else {
-            setEnd(true)
+            setEnd(true);
+            progress.end = true
+            saveLearnProgress(progress)
         }
     }
 
@@ -107,6 +122,7 @@ const Learn = () => {
         showLoader("Saving Progress")
         saveProgress(deck).then((result) => {
             hideLoader();
+            deleteLearnProgress()
             enqueueSnackbar(result.message, {
                 variant: 'success',
             });
@@ -126,6 +142,7 @@ const Learn = () => {
         giveUp(deck, cardsStudied)
             .then((result) => {
                 hideLoader();
+                deleteLearnProgress()
                 enqueueSnackbar(result.message, {
                     variant: 'success',
                 });
