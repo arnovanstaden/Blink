@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 // MUI
 import ModalMUI from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';

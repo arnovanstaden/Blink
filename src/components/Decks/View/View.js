@@ -44,14 +44,6 @@ const View = () => {
     const [cards, setCards] = useState(undefined);
     const [showDeckUpdate, setShowDeckUpdate] = useState(false);
 
-    // Prevent Back Navigation for Better UX
-    history.block((location, action) => {
-        if (action === "POP") {
-            handleUpdateDeckToggle()
-            return false
-        }
-    })
-
     // Hooks
     useEffect(() => {
         deleteLearnProgress()

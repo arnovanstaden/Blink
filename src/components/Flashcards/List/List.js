@@ -1,7 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { useState } from "react";
 import { Slide } from "react-reveal"
-import { useHistory } from "react-router-dom";
 
 // Context
 
@@ -22,20 +21,9 @@ import AddIcon from "@material-ui/icons/Add"
 import styles from "./list.module.scss";
 
 const List = ({ deck, cards, setCards }) => {
-    const history = useHistory();
 
     // State
     const [showFlashcardManage, setShowFlashcardManage] = useState(false);
-
-
-    // Prevent Back Navigation for Better UX
-    history.block((location, action) => {
-        if (action === "POP") {
-            setShowFlashcardManage()
-            return false
-        }
-    })
-
 
     // Handler
     function handleCreateCardToggle() {

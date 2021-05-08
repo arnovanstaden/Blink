@@ -1,4 +1,4 @@
-# The Mish Dish
+# Blink Flashvards
 A PWA App for Learning using the spaced repetition principle in the form of flashcards
 
 ## Link

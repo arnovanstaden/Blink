@@ -1,9 +1,6 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { deleteFlashcard } from "../../../utils/flashcards";
 import { useSnackbar } from 'notistack';
-
-// Context
-import { LoaderContext } from "../../../context/LoaderContext";
 
 // Components
 import Paper from "../../UI/Library/Paper/Paper";
@@ -17,7 +14,6 @@ import styles from "./card.module.scss"
 const Flashcard = ({ card, deleteCard, editCard }) => {
     // Config
     const { enqueueSnackbar } = useSnackbar();
-    const { showLoader, hideLoader } = useContext(LoaderContext);
 
     // State
     const [anchorEl, setAnchorEl] = useState(null);

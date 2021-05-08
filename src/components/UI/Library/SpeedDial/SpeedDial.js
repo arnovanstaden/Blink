@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ClassNames from "classnames";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // MUI
 import SpeedDialMUI from '@material-ui/lab/SpeedDial';
