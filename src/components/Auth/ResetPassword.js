@@ -66,6 +66,7 @@ export default function ResetPassword() {
             title="Reset Password"
             className={styles.auth}
             center
+            fullscreen
         >
             <Container maxWidth="xs">
                 <div className={styles.auth}>

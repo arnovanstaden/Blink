@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { getTotalCardsStudied, getUserDecks, getTotalCards } from "../../utils/decks"
+import { getTotalCardsStudied, getUserDecks } from "../../utils/decks"
 import withAuth from "../HOC/withAuth"
 
 // Context

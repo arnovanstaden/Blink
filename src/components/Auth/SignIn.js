@@ -77,6 +77,7 @@ export default function SignIn() {
         <Page
             title="Sign In"
             center
+            fullscreen
         >
             <Container maxWidth="xs">
                 <div className={styles.auth}>
