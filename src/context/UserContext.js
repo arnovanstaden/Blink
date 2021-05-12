@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { auth } from "../config/firebase";
+import { auth, analytics } from "../config/firebase";
 import { createDbUser } from "../utils/user";
 
 export const UserContext = createContext(null);
@@ -28,6 +28,7 @@ export const UserProvider = ({ children }) => {
                 throw error
             });
         await createDbUser(newUser)
+        analytics.logEvent("sign_up")
         return newUser
     }
 
@@ -40,6 +41,7 @@ export const UserProvider = ({ children }) => {
                 console.log(error)
                 throw error
             });
+        analytics.logEvent("login")
         return authResult
     };
 
