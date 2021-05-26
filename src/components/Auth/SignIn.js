@@ -36,6 +36,14 @@ export default function SignIn() {
         if (currentUser) {
             return history.push('/')
         }
+        if (history.location.search === "?test") {
+            emailRef.current.value = "test@test.com";
+            passwordRef.current.value = "Test123"
+
+            return enqueueSnackbar("Welcome Tester! Simply login with the details below to continue.", {
+                variant: 'success',
+            });
+        }
     }, []);
 
 
