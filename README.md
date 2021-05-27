@@ -1,8 +1,8 @@
 # Blink Flashcards
 A PWA App for Learning using the spaced repetition principle in the form of flashcards
 
-## Link
-You can visit the site [here](https://blink-flash.vercel.app/).
+## Demo
+You Can Explore This App With A Demo Account [here](https://blink-flash.vercel.app/signin?test).
 
 ## Features
 * Authentication
