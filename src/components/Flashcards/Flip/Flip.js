@@ -6,6 +6,8 @@ import styles from "./flip.module.scss";
 const Flip = ({ card }) => {
 
     const cardRef = useRef();
+    const textRef = useRef();
+    const contentRef = useRef()
 
     const flipToFront = () => {
         const cardElem = cardRef.current;
@@ -32,7 +34,17 @@ const Flip = ({ card }) => {
     // Effects
 
     useEffect(() => {
-        flipToFront()
+        flipToFront();
+
+        // Check Height
+        const contentHeight = contentRef.current.offsetHeight;
+        const textHeight = textRef.current.offsetHeight;
+
+        if (textHeight > contentHeight) {
+            document.querySelector(`.${styles.back}`).classList.add(styles.adjusted)
+        } else {
+            document.querySelector(`.${styles.back}`).classList.remove(styles.adjusted)
+        }
     })
 
     useEffect(() => {
@@ -46,12 +58,12 @@ const Flip = ({ card }) => {
 
     return (
         <div className={styles.card} onClick={handleFlipCard} ref={cardRef}>
-            <div className={styles.content}>
+            <div className={styles.content} ref={contentRef}>
                 <div className={styles.front}>
                     <p>{card.front}</p>
                 </div>
                 <div className={styles.back}>
-                    <p>{card.back}</p>
+                    <p ref={textRef}>{card.back}</p>
                 </div>
             </div>
         </div>
